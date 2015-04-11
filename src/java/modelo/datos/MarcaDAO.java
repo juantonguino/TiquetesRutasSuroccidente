@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -71,9 +72,7 @@ public class MarcaDAO {
          * @param vNombre != null && != "" Nombre de la marca a modificar
 	 */
 	public void actualizar(Marca nMarca, String vNombre){
-            String actualizar= "update marca "
-                                    + "set marca.nombre = " + nMarca.getNombre()   
-                                    + " where marca.nombre = " + vNombre ;
+            String actualizar= "update marca set marca.nombre = '" + nMarca.getNombre()+ "' where marca.nombre = '" + vNombre+"';";
             Connection con; 
             PreparedStatement ps;
             try {
@@ -95,16 +94,16 @@ public class MarcaDAO {
 	 * @param nMarca La marca a agregar a la base de datos
 	 */
 	public void agregar(Marca nMarca) {
-            
-            String agregar= "insert into marca (marca.nombre) "
-                                + "values ( " + nMarca.getNombre() + ");";
-            Connection con; 
-            PreparedStatement ps;
-            try {
-                con = fachada.conectarDB();
-                ps = con.prepareStatement(agregar);
-                fachada.desconectarDB(con);
-            } catch (ClassNotFoundException ex) {
+            String agregar= "insert into marca (marca.nombre) values ( '" + nMarca.getNombre() + "');";
+            try { 
+                Connection con = fachada.conectarDB();
+                if(con!=null){
+                    Statement instruccion= (Statement)con.createStatement();
+                    instruccion.execute(agregar);
+                    fachada.desconectarDB(con);
+                }
+            } 
+            catch (ClassNotFoundException ex) {
                 Logger.getLogger(MarcaDAO.class.getName()).log(Level.SEVERE, null, ex);
             } catch (SQLException ex) {
                 Logger.getLogger(MarcaDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -121,7 +120,7 @@ public class MarcaDAO {
 	 */
 	public void eliminar(Marca nMarca) {
            String eliminar= "delete from marca "
-                                + "where marca.nombre = " + nMarca.getNombre() + ";";
+                                + "where marca.nombre = '" + nMarca.getNombre() + "';";
            Connection con; 
             PreparedStatement ps;
             try {

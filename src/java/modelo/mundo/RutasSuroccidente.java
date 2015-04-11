@@ -215,7 +215,7 @@ public class RutasSuroccidente {
 	public void eliminarMarca(String nNombre){
             Marca buscada= buscarMarca(nNombre);
             marcas.remove(buscada);
-            //marcaDAO.eliminar(buscada);
+            marcaDAO.eliminar(buscada);
 	}
 	
 	
@@ -229,7 +229,7 @@ public class RutasSuroccidente {
 	public void modificarMarca(String nNombre, String vNombre){
             Marca buscada= buscarMarca(vNombre);
             buscada.setNombre(nNombre);
-            //marcaDAO.actualizar(buscada,vNombre);
+            marcaDAO.actualizar(buscada,vNombre);
 	}
 	
 	
@@ -654,9 +654,13 @@ public class RutasSuroccidente {
 	public void modificarCliente(String nNombres, String nApellidos, int nIdentificacion){
             Cliente buscado=buscarCliente(nIdentificacion);
             if(buscado!=null){
-                buscado.setNombres(nNombres);
-                buscado.setApellidos(nApellidos);
-                clienteDAO.actualizar(buscado);
+                try {
+                    buscado.setNombres(nNombres);
+                    buscado.setApellidos(nApellidos);
+                    clienteDAO.actualizar(buscado);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(RutasSuroccidente.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
 	}
 	
