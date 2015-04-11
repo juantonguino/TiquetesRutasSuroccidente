@@ -1,0 +1,114 @@
+/* 
+    Created on : 2/04/2015, 05:53:49 PM
+    Author     : (Megasoft)
+*/
+/*estilos index*/
+
+#cuerpo
+{
+    height: 400px;
+    width: 710px;
+    margin-left: 300px;
+}
+#ttl1
+{
+    background: #E8C15C;
+}
+#img1
+{
+    margin-top: 30px;
+    margin-right: 200px;
+    padding: 0;
+    margin: auto;
+}
+#img2
+{
+    margin-left: 150px;
+    margin-top: -20px;
+    padding: 0;
+    margin: auto;
+}
+#gm
+{
+    padding: 5px;
+    margin: 5px;
+}
+#botones
+{
+    background: #E37673;
+}
+/*gestionar marca*/
+#ges_marca, #mod_marca, #ges_linea, #mod_linea, #ges_vehiculo, #mod_vehiculo, #ges_cliente, #mod_cliente,
+#ges_propietario, #mod_propietario
+{
+    height: 400px;
+    width: 610px;
+    margin-left: 400px;
+}
+#nom_pag1, #nom_pag2, #nom_pag3, #nom_pag4, #nom_pag5, #nom_pag6, #nom_pag7, #nom_pag8, #nom_pag9, #nom_pag10,
+#nom_pag11
+{
+    background: #E8C15C;
+}
+#img_ges_marca
+{
+    margin-left: 100px;
+    margin-top: 10px;
+}
+#panel_gesMarca, #panel_nomMarca, #panel_gesLinea, #panel_modLinea, #panel_gesVehiculo, #panel_modVehiculo, #panel_gesCliente,
+#panel_modCliente, #panel_gesPropietario, #panel_modPropietario
+{
+    background: #E37673;
+}
+#pnl_agre, #panel_nomMarca, #panel_gesLinea, #panel_modLinea, #panel_gesVehiculo, #panel_modVehiculo, #panel_gesCliente,
+#panel_modCliente, #panel_gesPropietario, #panel_modPropietario
+{
+    margin-top: 1px;
+    padding: 5px;
+}
+#gal h2, #letras
+{
+    font-size: 1.3em;
+    padding: 0 auto;
+    text-align: center;
+    margin: 4px;
+}
+#tabla1
+{
+    margin-top: 1px;
+    margin-left: 5px;
+}
+#letras, #mod, #lin, #linea
+{
+    font-size: 2.5em;
+    margin-left: 100px;
+}
+/*modificar marca*/
+#img_mod_marca
+{
+    margin-left: 140px;
+    margin-top: 10px;
+}
+#modificar_mar
+{
+    margin-top: 1px;
+    margin-left: 5px;
+}
+/*gestionar vehiculo*/
+#vehi, #vehiculo
+{
+    font-size: 2.5em;
+    margin-left: 70px;
+}
+/*gestionar cliente*/
+#clien, #cliente
+{
+    font-size: 2.5em;
+    margin-left: 90px;
+}
+/*gestionar propietario*/
+#pro, #propie
+{
+    font-size: 2.5em;
+    margin-left: 70px;
+}

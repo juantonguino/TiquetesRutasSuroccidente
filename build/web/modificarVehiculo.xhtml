@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <title>Modificar Vehiculo</title>
+        <link rel="stylesheet" type="text/css" href="../css/style.css" />
+    </h:head>
+    <h:body id="mod_vehiculo">
+        <h:form>
+            <div id="nom_pag6">
+                <a id="vehiculo">
+                    <strong>MODIFICAR VEHICULO</strong>
+                </a>
+            </div>
+            <div id="panel_modVehiculo">
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="Modelo"/>
+                    <h:inputText value="#{gestionarVehiculo.vehiculoModificar.modelo}"/>
+                    <h:outputLabel value="Placa"/>
+                    <h:inputText value="#{gestionarVehiculo.vehiculoModificar.placa}"/>
+                    <h:outputLabel value="Numero Pasajeros"/>
+                    <h:inputText value="#{gestionarVehiculo.vehiculoModificar.numeroPasajeros}"/>
+                    <h:outputLabel value="Imagen"/>
+                    <h:outputLabel value="Ingreso Foto"/>
+                    <h:commandButton value="Modificar Vehiculo" style="margin: 8px;" actionListener="#{gestionarVehiculo.modificarVehiculo()}"/>
+                </h:panelGrid>
+            </div>
+            
+        </h:form>
+    </h:body>
+</html>

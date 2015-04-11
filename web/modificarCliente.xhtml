@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <title>Modificar Vehiculo</title>
+        <link rel="stylesheet" type="text/css" href="../css/style.css" />
+    </h:head>
+    <h:body id="mod_cliente">
+        <h:form>
+            <div id="nom_pag8">
+                <a id="cliente">
+                    <strong>GESTIONAR CLIENTE</strong>
+                </a>
+            </div>
+            <div id="panel_modCliente">
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="Identificacion"/>
+                    <h:inputText value="#{gestionarCliente.clienteModificar.identificacion}"/>
+                    <h:outputLabel value="Nombres"/>
+                    <h:inputText value="#{gestionarCliente.clienteModificar.nombres}"/>
+                    <h:outputLabel value="Apellidos"/>
+                    <h:inputText value="#{gestionarCliente.clienteModificar.apellidos}"/>
+                    <h:commandButton value="Modificar Cliente" style="margin: 8px;" actionListener="#{gestionarCliente.modificarVehiculo()}"/>
+                </h:panelGrid>
+            </div>
+            
+        </h:form>
+    </h:body>
+</html>

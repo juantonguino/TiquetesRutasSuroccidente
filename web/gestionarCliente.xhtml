@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>GESTIONAR CLIENTE</title>
+        <link rel="stylesheet" type="text/css" href="../css/style.css" />
+    </h:head>
+    <h:body id="ges_cliente">
+        <h:form>
+            <div id="nom_pag7">
+                <a id="clien">
+                    <strong>GESTIONAR CLIENTE</strong>
+                </a>
+            </div>
+            <div id="panel_gesCliente">
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="Identificacion"/>
+                    <h:inputText style="margin-left: 20px;" value="#{gestionarCliente.clienteAgregar.identificacion}"/>
+                    <h:outputLabel value="Nombres"/>
+                    <h:inputText style="margin-left: 20px;" value="#{gestionarCliente.clienteAgregar.nombres}"/>
+                    <h:outputLabel value="Apellidos"/>
+                    <h:inputText style="margin-left: 20px;" value="#{gestionarCliente.clienteAgregar.apellidos}"/>
+                    <h:commandButton value="Agregar Cliente" style="margin: 8px;" actionListener="#{gestionarCliente.agregar()}"/>
+                </h:panelGrid>
+            <div id="gal">
+                <h2>
+                    <a title="BUSCAR MARCA">BUSCAR CLIENTE</a>
+                </h2>
+            </div>
+            <h:panelGrid columns="2">
+                <h:outputLabel value="Identificacion Cliente"/>
+                <h:inputText value="#{gestionarCliente.clienteBuscar.identificacion}"/>
+                <h:commandButton value="Buscar Cliente" style="margin: 8px;" actionListener="#{gestionarCliente.buscar()}"/>
+                <h:commandButton value="Eliminar Busqueda" actionListener="#{gestionarCliente.restablecerListaClientes()}"/>
+            </h:panelGrid>
+            <h:dataTable value="#{gestionarCliente.listaClientes}" var="cliente">
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputLabel value="Identificacion"/>
+                    </f:facet>
+                    <h:outputLabel value="#{cliente.identificacion}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputLabel value="Nombres"/>
+                    </f:facet>
+                    <h:outputLabel value="#{cliente.nombres}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputLabel value="Apellidos"/>
+                    </f:facet>
+                    <h:outputLabel value="#{cliente.apellidos}"/>
+                </h:column>
+                <h:column>
+                    <h:commandButton value="Eliminar" actionListener="#{gestionarCliente.eliminar(cliente)}"/>
+                </h:column>
+                <h:column>
+                    <h:commandButton value="Modificar" action="#{gestionarCliente.redireccionarModificar(cliente)}"/>
+                </h:column>
+            </h:dataTable>
+            <h:commandButton value="Panel Control" style="margin: 8px;" actionListener="#{gestionarCliente.irPanelControl()}"/>
+            </div>
+            
+        </h:form>
+    </h:body>
+</html>

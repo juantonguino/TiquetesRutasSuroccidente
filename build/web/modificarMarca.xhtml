@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <title>Modificar Marca</title>
+        <link rel="stylesheet" type="text/css" href="../css/style.css" />
+    </h:head>
+    <h:body id="mod_marca">
+        <h:form>
+            <div id="nom_pag2">
+                <a id="mod">
+                    <strong>MODIFICAR MARCA</strong>
+                </a>
+            </div>
+            <div id="panel_nomMarca">
+                <h:panelGrid columns="2">
+                    <h:outputLabel style="margin-left: 5px;" value="Valor Actual"/>
+                    <h:inputText style="margin-left: 25px;" value="#{gestionarMarca.viejoNombreMarcaModificar}"/>
+                </h:panelGrid>
+                <div id="modificar_mar">
+                    <h:panelGrid columns="2">
+                        <h:outputLabel value="Nombre marca"/>
+                        <h:inputText value="#{gestionarMarca.nombreMarcaModificar}"/>
+                        <h:commandButton style="margin-top: 10px;" value="Modificar marca" actionListener="#{gestionarMarca.modificarMarca()}"/>
+                    </h:panelGrid>
+                </div>
+            </div>
+        </h:form>
+    </h:body>
+</html>

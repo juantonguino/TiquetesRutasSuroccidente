@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>GESTIONAR LINEA</title>
+        <link rel="stylesheet" type="text/css" href="../css/style.css" />
+    </h:head>
+    <h:body id="ges_linea">
+        <h:form>
+            <div id="nom_pag3">
+                <a id="lin">
+                    <strong>GESTIONAR LINEA</strong>
+                </a>
+            </div>
+            <div id="panel_gesLinea">
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="Nombre Marca"/>
+                    <h:selectOneMenu value="#{gestionarLinea.nombreMarca}">
+                        <f:selectItems value="#{gestionarLinea.listaMarcas}" var="marca" itemValue="#{marca.nombre}" itemLabel="#{marca.nombre}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="Nombre Linea"/>
+                    <h:inputText value="#{gestionarLinea.nombreLineaAgregar}"/>
+                    <h:commandButton value="Agregar Linea" style="margin: 8px;" actionListener="#{gestionarLinea.agregar()}"/>
+                </h:panelGrid>
+            <div id="gal">
+                <h2>
+                   <a title="BUSCAR MARCA">BUSCAR LINEA</a>
+                </h2>
+            </div>
+            <h:panelGrid columns="2">
+                <h:outputLabel value="Nombre Linea"/>
+                <h:inputText value="#{gestionarLinea.nombreLineaBuscar}"/>
+                <h:commandButton value="Buscar Linea" style="margin: 7px;" actionListener="#{gestionarLinea.buscar()}"/>
+                <h:commandButton value="Eliminar Busqueda" style="margin: 7px;" actionListener="#{gestionarLinea.restablecerLista()}"/>
+            </h:panelGrid>
+            <h:dataTable value="#{gestionarLinea.listaLineas}" var="linea">
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputLabel value="Nombre Linea"/>
+                    </f:facet>
+                    <h:outputLabel value="#{linea.nombre}"/>
+                </h:column>
+                <h:column>
+                    <h:commandButton value="Eliminar" actionListener="#{gestionarLinea.eliminar(linea)}"/>
+                </h:column>
+                <h:column>
+                    <h:commandButton value="Modificar" action="#{gestionarLinea.redireccionarModificar(linea)}"/>
+                </h:column>
+            </h:dataTable>
+            <h:commandButton value="Panel Control" style="margin: 8px;" actionListener="#{gestionarLinea.irPanelControl()}"/>
+            </div>
+            
+        </h:form>
+    </h:body>
+</html>

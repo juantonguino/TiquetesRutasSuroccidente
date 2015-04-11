@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <title>RUTAS DEL SUROCCIDENTE</title>
+        <link rel="stylesheet" type="text/css" href="../css/style.css" />
+    </h:head>
+    <h:body id="cuerpo" >
+        <h:form>
+            <div id="ttl1">
+                <h:panelGrid columns="2">
+                    <img id="img1" src="img/car.png"/>
+                    <img id="img1" src="img/nombre.png"/>
+                </h:panelGrid>
+            </div>
+            <div id="botones">
+                <h:panelGrid columns="5" >
+                    <h:commandButton value="Gestionar Marca" style="margin: 7px; padding: 5px;" actionListener="#{panelControl.redireccionarGestionarMarca()}"/>
+                    <h:commandButton value="Gestionar Línea" style="margin: 7px; padding: 5px;" actionListener="#{panelControl.redireccionarGestionarLinea()}"/>
+                    <h:commandButton value="Gestionar Vehículo" style="margin: 7px; padding: 5px;" actionListener="#{panelControl.redireccionarGestionarVehiculo()}"/>
+                    <h:commandButton value="Gestionar Cliente" style="margin: 7px; padding: 5px;" actionListener="#{panelControl.redireccionarGestionarCliente()}"/>
+                    <h:commandButton value="Gestionar Propietario" style="margin: 7px; padding: 5px;" actionListener="#{panelControl.redireccionarGestionarPropietario()}"/>
+                </h:panelGrid>
+            </div>
+            
+        </h:form>
+    </h:body>
+</html>

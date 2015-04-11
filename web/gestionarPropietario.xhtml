@@ -1,0 +1,89 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>GESTIONAR PROPIETARIO</title>
+        <link rel="stylesheet" type="text/css" href="../css/style.css" />
+    </h:head>
+    <h:body id="ges_propietario">
+        <h:form >
+            <div id="nom_pag9">
+                <a id="pro">
+                    <strong>GESTIONAR VEHICULO</strong>
+                </a>
+            </div>
+            <div id="panel_gesPropietario">
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="Placa Vehiculo"/>
+                    <h:selectOneMenu style="margin-left: 20px" value="#{gestionarPropietario.placaVehiculo}">
+                        <f:selectItems value="#{gestionarPropietario.listaVehiculos}" var="vehiculo" itemValue="#{vehiculo.placa}" itemLabel="#{vehiculo.placa}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel  value="Identificacion"/>
+                    <h:inputText style="margin-left: 20px" value="#{gestionarPropietario.propietarioAgregar.identificacion}"/>
+                    <h:outputLabel value="Apellidos"/>
+                    <h:inputText style="margin-left: 20px" value="#{gestionarPropietario.propietarioAgregar.apellidos}"/>
+                    <h:outputLabel value="Nombres"/>
+                    <h:inputText style="margin-left: 20px" value="#{gestionarPropietario.propietarioAgregar.nombres}"/>
+                    <h:outputLabel value="Direccion"/>
+                    <h:inputText style="margin-left: 20px" value="#{gestionarPropietario.propietarioAgregar.direccion}"/>
+                    <h:outputLabel value="Telefono"/>
+                    <h:inputText style="margin-left: 20px" value="#{gestionarPropietario.propietarioAgregar.telefono}"/>
+                    <h:commandButton value="Agregar Propietario" style="margin: 8px;" actionListener="#{gestionarPropietario.agregar()}"/>
+            </h:panelGrid>
+            <div id="gal">
+                <h2>
+                    <a title="BUSCAR MARCA">BUSCAR PROPIETARIO</a>
+                </h2>
+            </div>
+            <h:panelGrid columns="2">
+                <h:outputLabel value="Identificacion Propietario"/>
+                <h:inputText value="#{gestionarPropietario.propietarioBuscar.identificacion}"/>
+                <h:commandButton value="Buscar Propietario" style="margin: 8px;" actionListener="#{gestionarPropietario.buscar()}"/>
+                <h:commandButton value="Eliminar Busqueda" style="margin: 8px;" actionListener="#{gestionarPropietario.restablecerListaPropietarios()}"/>
+            </h:panelGrid>
+            <h:dataTable value="#{gestionarPropietario.listaPropietarios}" var="propietario">
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputLabel value="Identificacion"/>
+                    </f:facet>
+                    <h:outputLabel value="#{propietario.identificacion}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputLabel value="Apellidos"/>
+                    </f:facet>
+                    <h:outputLabel value="#{propietario.apellidos}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputLabel value="Nombres"/>
+                    </f:facet>
+                    <h:outputLabel value="#{propietario.nombres}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputLabel value="Direccion"/>
+                    </f:facet>
+                    <h:outputLabel value="#{propietario.direccion}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputLabel value="Telefono"/>
+                    </f:facet>
+                    <h:outputLabel value="#{propietario.telefono}"/>
+                </h:column>
+                <h:column>
+                    <h:commandButton value="Eliminar" actionListener="#{gestionarPropietario.eliminar(propietario)}"/>
+                </h:column>
+                <h:column>
+                    <h:commandButton value="Modificar" action="#{gestionarPropietario.redireccionarModificar(propietario)}"/>
+                </h:column>
+            </h:dataTable>
+            <h:commandButton style="margin: 8px;" value="Panel Control" actionListener="#{gestionarPropietario.irPanelControl()}"/>
+            </div>
+            
+        </h:form>
+    </h:body>
+</html>

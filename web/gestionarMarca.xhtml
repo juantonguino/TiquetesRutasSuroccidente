@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>GESTIONAR MARCA</title>
+        <link rel="stylesheet" type="text/css" href="../css/style.css" />
+    </h:head>
+    <h:body id="ges_marca">
+        <h:form>
+            <div id="nom_pag1">
+                <a id="letras">
+                    <strong>GESTIONAR MARCA</strong>
+                </a>
+            </div>
+            <div id="panel_gesMarca">
+                <div id="pnl_agre">
+                    <h:panelGrid columns="2">
+                        <h:outputLabel value="Nombre marca"/>
+                        <h:inputText style="margin-left: 9px;" value="#{gestionarMarca.nombreMarcaAgregar}"/>
+                    </h:panelGrid>
+                </div>
+                <h:commandButton value="Agregar marca" style="margin: 8px;" actionListener="#{gestionarMarca.agregar()}"/>
+                    <div id="gal">
+                        <h2>
+                            <a title="BUSCAR MARCA">BUSCAR MARCA</a>
+                        </h2>
+                    </div>
+                <div id="pnl_buscar">
+                    <h:panelGrid columns="2">
+                    
+                        <h:outputLabel style="margin: 5px;" value="Nombre marca"/>
+                        <h:inputText value="#{gestionarMarca.nombreMarcaBuscar}"/>
+                    
+                        <h:commandButton value="Buscar marca" style="margin: 8px;" actionListener="#{gestionarMarca.buscar()}"/>
+                        <h:commandButton value="Eliminar Busqueda" style="margin: 8px;" actionListener="#{gestionarMarca.restablecerlista()}"/>
+                    </h:panelGrid>
+                </div>
+                
+                <div id="tabla1">
+                    <h:dataTable value="#{gestionarMarca.listaMarca}" var="marca">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputLabel value="Nombre Marca"/>
+                            </f:facet>
+                                <h:outputLabel value="#{marca.nombre}"/>
+                        </h:column>  
+                        <h:column>
+                            <h:commandButton value="Eliminar" actionListener="#{gestionarMarca.eliminar(marca)}"/>
+                        </h:column>
+                        <h:column>
+                            <h:commandButton value="Modificar" action="#{gestionarMarca.redireccionarModificar(marca)}"/>
+                         </h:column>
+                    </h:dataTable>
+                </div>
+                
+                <h:panelGrid columns="1">
+                    <h:commandButton style="margin: 8px;" value="Panel Control" actionListener="#{gestionarMarca.irPanelControl()}"/>
+                </h:panelGrid>
+            </div>
+        </h:form>
+    </h:body>
+</html>
