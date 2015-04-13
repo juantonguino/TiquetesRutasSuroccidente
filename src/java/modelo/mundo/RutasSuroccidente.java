@@ -399,7 +399,7 @@ public class RutasSuroccidente {
                         Vehiculo miVehiculo = misVehiculos.get(k);
                         if(miVehiculo.getPlaca().equals(nPlaca)){
                             misVehiculos.remove(miVehiculo);
-                            miLinea.getVehiculoDAO().eliminar(miMarca, miLinea, miVehiculo);
+                            //miLinea.getVehiculoDAO().eliminar(miMarca, miLinea, miVehiculo);
                         }
                     }
                 }
@@ -427,8 +427,8 @@ public class RutasSuroccidente {
                         if(miVehiculo.getPlaca().equals(nPlaca)){
                             miVehiculo.setFotografia(nFotografia);
                             miVehiculo.setModelo(nModelo);
-                            miVehiculo.setNumeroPasajeros(nNumeroPasajeros);
-                            miLinea.getVehiculoDAO().actualizar(miMarca, miLinea, miVehiculo);
+                            miVehiculo.setNumeroPasajeros(nNumeroPasajeros);    
+                            //miLinea.getVehiculoDAO().actualizar(miMarca, miLinea, miVehiculo);
                         }
                     }
                 }
@@ -457,7 +457,7 @@ public class RutasSuroccidente {
                         if(miLinea.getNombre().equals(nLinea)){
                             Vehiculo v= new Vehiculo(nModelo, nPlaca, nNumeroPasajeros, nFotografia);
                             miLinea.getVehiculos().add(v);
-                            miLinea.getVehiculoDAO().agregar(miMarca, miLinea, v);
+                            //miLinea.getVehiculoDAO().agregar(miMarca, miLinea, v);
                         }
                     }
                 }
