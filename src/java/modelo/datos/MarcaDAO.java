@@ -73,12 +73,13 @@ public class MarcaDAO {
 	 */
 	public void actualizar(Marca nMarca, String vNombre){
             String actualizar= "update marca set marca.nombre = '" + nMarca.getNombre()+ "' where marca.nombre = '" + vNombre+"';";
-            Connection con; 
-            PreparedStatement ps;
             try {
-                con = fachada.conectarDB();
-                ps = con.prepareStatement(actualizar);
-                fachada.desconectarDB(con);
+                Connection con = fachada.conectarDB();
+                if(con!=null){
+                    Statement instruccion= (Statement)con.createStatement();
+                    instruccion.execute(actualizar);
+                    fachada.desconectarDB(con);
+                }
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(MarcaDAO.class.getName()).log(Level.SEVERE, null, ex);
             } catch (SQLException ex) {
@@ -119,14 +120,15 @@ public class MarcaDAO {
 	 * @param nMarca La marca a eliminar de la base de datos nMarca !=null
 	 */
 	public void eliminar(Marca nMarca) {
-           String eliminar= "delete from marca "
+            String eliminar= "delete from marca "
                                 + "where marca.nombre = '" + nMarca.getNombre() + "';";
-           Connection con; 
-            PreparedStatement ps;
             try {
-                con = fachada.conectarDB();
-                ps = con.prepareStatement(eliminar);
-                fachada.desconectarDB(con);
+                Connection con = fachada.conectarDB();
+                if(con!=null){
+                    Statement instruccion= (Statement)con.createStatement();
+                    instruccion.execute(eliminar);
+                    fachada.desconectarDB(con);
+                }
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(MarcaDAO.class.getName()).log(Level.SEVERE, null, ex);
             } catch (SQLException ex) {

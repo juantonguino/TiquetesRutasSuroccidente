@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -69,15 +70,16 @@ public class LineaDAO {
          * @param vNombre != null && != "" Nombre de la linea a cambiar
 	 */
 	public void actualizar(Marca nMarca, Linea nLinea, String vNombre){
-            String actualizar= "update linea set linea.nombre = " + nLinea.getNombre()
-                                + " where linea.nombre = " + vNombre  
-                                + " and linea.marca_nombre = " + nMarca.getNombre();
-            Connection con; 
-            PreparedStatement ps;
+            String actualizar= "update linea set linea.nombre = '" + nLinea.getNombre()
+                                + "' where linea.nombre = '" + vNombre  
+                                + "' and linea.marca_nombre ='" + nMarca.getNombre()+"';";
             try {
-                con = fachada.conectarDB();
-                ps = con.prepareStatement(actualizar);
-                fachada.desconectarDB(con);
+                Connection con = fachada.conectarDB();
+                if(con!=null){
+                    Statement instruccion= (Statement)con.createStatement();
+                    instruccion.execute(actualizar);
+                    fachada.desconectarDB(con);
+                }
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(MarcaDAO.class.getName()).log(Level.SEVERE, null, ex);
             } catch (SQLException ex) {
@@ -94,13 +96,14 @@ public class LineaDAO {
 	 */
 	public void agregar(Marca nMarca, Linea nLinea){
             String agregar= "insert into linea (nombre, marca_nombre) "
-                                + "values ( " + nLinea.getNombre() + " ,"+ nMarca.getNombre();
-            Connection con; 
-            PreparedStatement ps;
+                                + "values ('" + nLinea.getNombre() + "',"+ nMarca.getNombre();
             try {
-                con = fachada.conectarDB();
-                ps = con.prepareStatement(agregar);
-                fachada.desconectarDB(con);
+                Connection con = fachada.conectarDB();
+                if(con!=null){
+                    Statement instruccion= (Statement)con.createStatement();
+                    instruccion.execute(agregar);
+                    fachada.desconectarDB(con);
+                }
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(MarcaDAO.class.getName()).log(Level.SEVERE, null, ex);
             } catch (SQLException ex) {
@@ -118,12 +121,13 @@ public class LineaDAO {
             String eliminar= "delete from linea "
                             + "where linea.mara_nombre = " + nMarca.getNombre()
                             + " and linea.nombre = " + nLinea.getNombre();
-            Connection con; 
-            PreparedStatement ps;
             try {
-                con = fachada.conectarDB();
-                ps = con.prepareStatement(eliminar);
-                fachada.desconectarDB(con);
+                Connection con = fachada.conectarDB();
+                if(con!=null){
+                    Statement instruccion= (Statement)con.createStatement();
+                    instruccion.execute(eliminar);
+                    fachada.desconectarDB(con);
+                }
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(MarcaDAO.class.getName()).log(Level.SEVERE, null, ex);
             } catch (SQLException ex) {
