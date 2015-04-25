@@ -27,7 +27,8 @@ public class PropietarioDAO {
          * <post:> Inicializar los atributos
 	 */
 	public PropietarioDAO() {
-		// TODO Auto-generated constructor stub
+            // TODO Auto-generated constructor stub
+            fachada= new FachadaDB();
 	}
 	
 	/**
