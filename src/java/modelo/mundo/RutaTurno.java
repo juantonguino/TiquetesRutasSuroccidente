@@ -7,7 +7,7 @@ import java.util.Date;
  * Clase encargada del manejo de informacion de RutaTurno
  * @author megasoft
  * Universidad Mariana (Pasto - Colombia) 
- * Departamento de Ingeniería de Sistemas. 
+ * Departamento de Ingenierï¿½a de Sistemas. 
  */
 public class RutaTurno {
 	
@@ -38,6 +38,7 @@ public class RutaTurno {
 	 */
 	public RutaTurno(String nCiudadOrigen, String nCiudadDestino, Date nHoraSalida) {
 		// TODO Auto-generated constructor stub
+            
 	}
 	
 	

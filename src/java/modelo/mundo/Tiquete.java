@@ -15,6 +15,12 @@ import modelo.datos.ClienteDAO;
 public class Tiquete {
 
 
+        /**
+	 * el numero del tiquete
+	 */
+	private int numero;
+        
+        
 	/**
 	 * La hora de la venta del tiquete
 	 */
@@ -31,13 +37,34 @@ public class Tiquete {
 	 * constructor de la clase tiquete<br>
 	 * @param nHoraVenta la hora de la venta del tiquete nHoraVenta !=""
 	 * @param nValorTiquete el valor del tiquete nValorTiquete !=""
-	 * @param nCliente el cliente que compro un tiquete nCliente !=""
+	 * @param nNumero el numero del tiquete asignado nNumero>0
 	 */
-	public Tiquete(Date nHoraVenta, double nValorTiquete, Cliente nCliente) {
+	public Tiquete(Date nHoraVenta, double nValorTiquete, int nNumero) {
 		// TODO Auto-generated constructor stub
+            horaVenta=nHoraVenta;
+            valorTiquete=nValorTiquete;
+            numero=nNumero;
 	}
 	
 	
+        /**
+	 * retorna el numero del tiquete
+	 * @return el numero del tiquete del tiquete
+	 */
+	public int getNumero(){
+		return numero;
+	}
+	
+	
+	/**
+	 * establece el numero de un tiquete
+	 * @param numero el numero del tiquete>0
+	 */
+	public void setNumero(int numero){
+		this.numero = numero;
+	}
+        
+        
 	/**
 	 * retorna la hora de la venta del tiquete
 	 * @return horaVenta la hora de la venta del tiquete
