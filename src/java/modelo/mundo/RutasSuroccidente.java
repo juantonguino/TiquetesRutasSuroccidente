@@ -681,4 +681,64 @@ public class RutasSuroccidente {
                 clienteDAO.agregar(c);
             }
 	}
+        
+        
+        /**
+         * Asigna una ruta y turno a un vehículo.
+         * <b>post:</b> se asignado una ruta y un turno al vehiculo cuya placa se pasa como parametro
+         * @param rutaAsignar la ruta la cual se va a asignar ritaAsignar !=null
+         * @param placa el numero de la placa del vehiculo al cualse se le va a asignar la placa placa!=null
+         */
+        public void asignarRutaTurnoVehiculo(RutaTurno rutaAsignar, String placa){
+            Vehiculo vehiculo = buscarVehiculo(placa);
+            vehiculo.setRutaTurno(rutaAsignar);
+            vehiculo.getRutaTurnoDAO().agregar(null, null, vehiculo, rutaAsignar);
+        }
+        
+        
+        /**
+         * permite vender un tiquete a un cliente y lo asigna a un vehiculo
+         * <b>post:</b> se ha asignado un tiquete a un cliente y a un vehiculo
+         * @param tiqueteVender el tiquete a vender
+         * @param placa la placa del vehiculo a la cual se va a cargar el tiquete
+         * @param identificacion el numero de identificacion del clinte
+         */
+        public void venderTiqueteACliente(Tiquete tiqueteVender, String placa, int identificacion){
+            
+        }
+        
+        
+        /**
+         * permite cancelar la venta de un tiqute a un cliente y la descarga de la lista de vehiculos
+         * <b>post:</b> se ha cancelado la venta del tiquete con la placa del vehiculo y el numerp de identificacion
+         * @param tiqueteCancelar el numero de tiquete a cancelar
+         * @param placa la placa del vehiculo a cancelar
+         * @param identificacion el numero de identificacion del cliente a cancelar
+         */
+        public void cancelarVentaDeTiqueteACliente(Tiquete tiqueteCancelar, String placa, int identificacion){
+            
+        }
+        
+        
+        /**
+         * permite reportar el numero de tiquetes vendidos por vehiculo de acuerdo a una ruta y turno determinadas
+         * <b>post:</b> se ha reportado el numero de tiquetes por la ruta y la placa
+         * @param rutaReportar la ruta por la cual se desea dar el reporte
+         * @param placa la placa de vehiculo por el cual se desea dar el reporte
+         * @return el numero de tiquetes vendidos
+         */
+        public int reportarNumeroTiquetesVendidosDeVehiculoPorRutaTurno(RutaTurno rutaReportar, String placa){
+            return 0;
+        }
+        
+        
+        /**
+         * permite reportar el valor de tiquetes vendidos prara una ruta y un turno
+         * <b>post:</b> se ha calculado y reportado el total de tiqutes vendidos  por la ruta y turno dada
+         * @param rutaReportar la ruta y le turno por la cualse desea reportar lo tiquetes
+         * @return el numero de tiqutes vendidos por una ruta y un turno pasadas como parametro
+         */
+        public double reportarValorTotalVentaTiquetesParaRutaTurno(RutaTurno rutaReportar){
+            return 0;
+        }
 }

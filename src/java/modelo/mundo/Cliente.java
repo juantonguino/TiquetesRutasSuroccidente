@@ -1,6 +1,7 @@
 package modelo.mundo;
 
 import java.util.ArrayList;
+import modelo.datos.TiqueteDAO;
 
 
 /**
@@ -36,6 +37,12 @@ public class Cliente {
         private ArrayList<Tiquete> tiquetes;
 	
 	
+        /**
+         * objeto encatgado de la administracion de los datos
+         */
+        private TiqueteDAO tiqueteDAO;
+        
+        
 	/**
 	 * Crea un cliente con la informacion basica
 	 * @param nIdentificacion es la identificacion del cliente nIdentificacion !=""
@@ -119,5 +126,23 @@ public class Cliente {
          */
         public void setTiquetes(ArrayList<Tiquete> tiquetes) {
             this.tiquetes = tiquetes;
+        }
+
+        
+        /**
+         * 
+         * @return 
+         */
+        public TiqueteDAO getTiqueteDAO() {
+            return tiqueteDAO;
+        }
+
+        
+        /**
+         * 
+         * @param tiqueteDAO 
+         */
+        public void setTiqueteDAO(TiqueteDAO tiqueteDAO) {
+            this.tiqueteDAO = tiqueteDAO;
         }
 }
