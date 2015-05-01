@@ -36,4 +36,7 @@ public class PanelControl extends Controller{
     public void redireccionarGestionarPropietario(){
         super.redireccionarVista("gestionarPropietario.xhtml");
     }
+    public void redireccionarAsignarRutaTurno(){
+        super.redireccionarVista("asignarRutaTurno.xhtml");
+    }
 }
