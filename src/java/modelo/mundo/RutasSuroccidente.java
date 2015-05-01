@@ -704,7 +704,17 @@ public class RutasSuroccidente {
          * @param identificacion el numero de identificacion del clinte
          */
         public void venderTiqueteACliente(Tiquete tiqueteVender, String placa, int identificacion){
-            
+            Vehiculo v=buscarVehiculo(placa);
+            Cliente c= buscarCliente(identificacion);
+            Tiquete[] tiquetesVehiculo=v.getTiquetes();
+            for(int i=0;i<tiquetesVehiculo.length;i++){
+                if(tiquetesVehiculo[i]==null){
+                    tiquetesVehiculo[i]=tiqueteVender;
+                    c.getTiquetes().add(tiqueteVender);
+                    v.getTiqueteDAO().agregar(null, null, v, tiqueteVender);
+                    c.getTiqueteDAO().agregar(null, null, c, tiqueteVender);
+                }
+            }
         }
         
         
@@ -716,7 +726,21 @@ public class RutasSuroccidente {
          * @param identificacion el numero de identificacion del cliente a cancelar
          */
         public void cancelarVentaDeTiqueteACliente(Tiquete tiqueteCancelar, String placa, int identificacion){
+            Vehiculo v=buscarVehiculo(placa);
+            Cliente c= buscarCliente(identificacion);
             
+            Tiquete[] tiquetesVehiculo=v.getTiquetes();
+            for(int i=0;i<tiquetesVehiculo.length;i++){
+                if(tiquetesVehiculo[i]==null){
+                    if(tiquetesVehiculo[i].getNumero()== tiqueteCancelar.getNumero()){
+                        tiquetesVehiculo[i]=null;
+                        c.getTiquetes().remove(tiqueteCancelar);
+                        
+                        v.getTiqueteDAO().agregar(null, null, v, tiqueteCancelar);
+                        c.getTiqueteDAO().agregar(null, null, c, tiqueteCancelar);
+                    }
+                }
+            }
         }
         
         
