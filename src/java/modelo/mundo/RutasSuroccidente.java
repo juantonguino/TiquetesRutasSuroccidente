@@ -14,6 +14,11 @@ import modelo.datos.MarcaDAO;
  * @author megasoft 
  */
 public class RutasSuroccidente {
+        
+    
+        /**
+         * constante para el manejo de horas en el sistema y la base de datos
+         */
         public final static String FORMATO_HORAS="hh:mm:ss";
     
 	
@@ -80,6 +85,7 @@ public class RutasSuroccidente {
         //----------------------------------------------------------------------
         //GETTERS AND SETTERS
         //----------------------------------------------------------------------
+        
         
         /**
          * metofo que permite obterner el objeto para guardar una marca
