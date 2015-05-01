@@ -14,7 +14,8 @@ import modelo.datos.MarcaDAO;
  * @author megasoft 
  */
 public class RutasSuroccidente {
-	
+        public final static String FORMATO_HORAS="hh:mm:ss";
+    
 	
 	/**
 	 * atributo encargado del manejo de las marcas en la base de datos
