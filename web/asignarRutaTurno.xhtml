@@ -11,7 +11,7 @@
         <h:form>
             <div id="nom_pag9">
                 <a id="pro">
-                    <strong>GESTIONAR PROPIETARIO</strong>
+                    <strong>GESTIONAR RURA Y TURNO</strong>
                 </a>
             </div>
             <h:panelGrid columns="2">
@@ -26,12 +26,6 @@
                 <h:outputLabel value="Hora Salida"/>
                 <h:inputText value="#{asignarRutaTurno.hora}"/>
                 <h:commandButton value="Asignar Ruta" actionListener="#{asignarRutaTurno.asignarRutaTurno()}"/>
-            </h:panelGrid>
-            <h:panelGrid columns="2">
-                <h:outputLabel value="Identificacion Propietario"/>
-                <h:inputText value="#{gestionarPropietario.propietarioBuscar.identificacion}"/>
-                <h:commandButton value="Buscar Propietario" style="margin: 8px;" actionListener="#{gestionarPropietario.buscar()}"/>
-                <h:commandButton value="Eliminar Busqueda" style="margin: 8px;" actionListener="#{gestionarPropietario.restablecerListaPropietarios()}"/>
             </h:panelGrid>
             <h:dataTable value="#{asignarRutaTurno.listaVehiculosConRuta}" var="vehiculo">
                 <h:column>
@@ -59,6 +53,7 @@
                     <h:outputLabel value="#{vehiculo.rutaTurno.horaSalida}"/>
                 </h:column>
             </h:dataTable>
+            <h:commandButton value="Panel Control" action="index.xhtml"/>
         </h:form>
     </h:body>
 </html>
