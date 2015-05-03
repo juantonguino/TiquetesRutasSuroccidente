@@ -804,4 +804,36 @@ public class RutasSuroccidente {
         public double reportarValorTotalVentaTiquetesParaRutaTurno(RutaTurno rutaReportar){
             return 0;
         }
+        public ArrayList<RutaTurno> seleccionarRutasDistintas(){
+            ArrayList<RutaTurno> listaRepetida = new ArrayList<RutaTurno>();
+            for(int i=0;i< marcas.size();i++){
+                ArrayList<Linea> misLineas = marcas.get(i).getLineas();
+                for(int j=0;j<misLineas.size();j++){
+                    ArrayList<Vehiculo> misVehiculos = misLineas.get(j).getVehiculos();
+                    Vehiculo miVehiculo = misVehiculos.get(j);
+                    RutaTurno miRuta = miVehiculo.getRutaTurno();
+                    if(miRuta!=null){
+                        listaRepetida.add(miRuta);
+                    }
+                }
+            }
+            ArrayList<RutaTurno> listaRetornar= new ArrayList<RutaTurno>();
+            for(int i=0;i<listaRepetida.size();i++){
+                RutaTurno ruta = listaRepetida.get(i);
+                RutaTurno buscada= buscarRutaTurno(listaRetornar, ruta);
+                if(buscada==null){
+                    listaRetornar.add(ruta);
+                }
+            }
+            return listaRetornar;
+        }
+        public RutaTurno buscarRutaTurno(ArrayList<RutaTurno> listaRutas, RutaTurno buscar){
+            for(int i=0; i<listaRutas.size(); i++){
+                RutaTurno ruta = listaRutas.get(i);
+                if(ruta.getCiudadDestino().equalsIgnoreCase(buscar.getCiudadDestino())&& ruta.getCiudadOrigen().equalsIgnoreCase(buscar.getCiudadOrigen())&&ruta.getHoraSalida().equals(buscar.getHoraSalida())){
+                    return ruta;
+                }
+            }
+            return null;
+        }
 }
