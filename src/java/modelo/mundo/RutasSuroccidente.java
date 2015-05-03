@@ -787,10 +787,9 @@ public class RutasSuroccidente {
          * permite reportar el numero de tiquetes vendidos por vehiculo de acuerdo a una ruta y turno determinadas
          * <b>post:</b> se ha reportado el numero de tiquetes por la ruta y la placa
          * @param rutaReportar la ruta por la cual se desea dar el reporte
-         * @param placa la placa de vehiculo por el cual se desea dar el reporte
          * @return el numero de tiquetes vendidos
          */
-        public int reportarNumeroTiquetesVendidosDeVehiculoPorRutaTurno(RutaTurno rutaReportar, String placa){
+        public int reportarNumeroTiquetesVendidosDeVehiculoPorRutaTurno(String placa){
             return 0;
         }
         
@@ -820,7 +819,7 @@ public class RutasSuroccidente {
             ArrayList<RutaTurno> listaRetornar= new ArrayList<RutaTurno>();
             for(int i=0;i<listaRepetida.size();i++){
                 RutaTurno ruta = listaRepetida.get(i);
-                RutaTurno buscada= buscarRutaTurno(listaRetornar, ruta);
+                RutaTurno buscada= buscarRutaTurno(listaRepetida, ruta);
                 if(buscada==null){
                     listaRetornar.add(ruta);
                 }

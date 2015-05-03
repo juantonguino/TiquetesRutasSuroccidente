@@ -42,4 +42,10 @@ public class PanelControl extends Controller{
     public void redireccionarGestionarTiquete(){
         super.redireccionarVista("gestionarTiquete.xhtml");
     }
+    public void redireccionarReportarValorTotal(){
+        super.redireccionarVista("reportarValorTotal.xhtml");
+    }
+    public void redireccionarReportarNumeroTiquetesVendidos(){
+        super.redireccionarVista("reportarNumeroTiquetesVendidos.xhtml");
+    }
 }

@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>REPORTER NUMERO TIQUETES VENDIDOS</title>
+        <link rel="stylesheet" type="text/css" href="../css/style.css" />
+    </h:head>
+    <h:body>
+        <h:form>
+            <div id="nom_pag9">
+                <a id="pro">
+                    <strong>REPORTER NUMERO TIQUETES VENDIDOS</strong>
+                </a>
+            </div>
+            <h:dataTable value="#{reporteNumeroTiequetesVendidos.listaVehiculosConRuta}" var="vehiculo">
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputLabel value="Placa"/>
+                    </f:facet>
+                    <h:outputLabel value="#{vehiculo.placa}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputLabel value="Ciudad Origen"/>
+                    </f:facet>
+                    <h:outputLabel value="#{vehiculo.rutaTurno.ciudadOrigen}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputLabel value="Ciudad Destino"/>
+                    </f:facet>
+                    <h:outputLabel value="#{vehiculo.rutaTurno.ciudadDestino}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputLabel value="Hora Salida"/>
+                    </f:facet>
+                    <h:outputLabel value="#{vehiculo.rutaTurno.horaSalida}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputLabel value="Numero Tiquetes"/>
+                    </f:facet>
+                    <h:outputLabel value="#{reporteNumeroTiequetesVendidos.darReporteNumeroTiquetes(vehiculo.placa)}"/>
+                </h:column>
+            </h:dataTable>
+            <h:commandButton value="Panel Control" action="index.xhtml"/>
+        </h:form>
+    </h:body>
+</html>
+

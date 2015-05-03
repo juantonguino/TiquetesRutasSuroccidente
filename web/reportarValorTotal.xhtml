@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>REPORTE VALOR TOTAL TIQUETES</title>
+        <link rel="stylesheet" type="text/css" href="../css/style.css" />
+    </h:head>
+    <h:body>
+        <h:form>
+            <div id="nom_pag9">
+                <a id="pro">
+                    <strong>REPORTE VALOR TOTAL TIQUETES</strong>
+                </a>
+            </div>
+            <h:dataTable value="#{reporteTotalValor.rutasTurnos}" var="ruta">
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputLabel value="Ciudad Origen"/>
+                    </f:facet>
+                    <h:outputLabel value="#{ruta.ciudadOrigen}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputLabel value="Ciudad Destino"/>
+                    </f:facet>
+                    <h:outputLabel value="#{ruta.ciudadDestino}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputLabel value="Hora Salida"/>
+                    </f:facet>
+                    <h:outputLabel value="#{ruta.horaSalida}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputLabel value="Valor Total"/>
+                    </f:facet>
+                    <h:outputLabel value="#{reporteTotalValor.darReporteValorRutaTurno(ruta)}"/>
+                </h:column>
+            </h:dataTable>
+            <h:commandButton value="Panel Control" action="index.xhtml"/>
+        </h:form>
+    </h:body>
+</html>
