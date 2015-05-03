@@ -50,8 +50,14 @@ public class RutasSuroccidente {
          * atributo parte del patron singleton
          */
         private static RutasSuroccidente instancia;
-	
-
+        
+        
+        /**
+         * contador de tiquetes
+         */
+        private int numeroTiquetes;
+        
+        
         //-------------------------------------------------------------------------------------------
 	//Constructor
 	//-------------------------------------------------------------------------------------------
@@ -716,6 +722,8 @@ public class RutasSuroccidente {
             Tiquete[] tiquetesVehiculo=v.getTiquetes();
             for(int i=0;i<tiquetesVehiculo.length;i++){
                 if(tiquetesVehiculo[i]==null){
+                    numeroTiquetes++;
+                    tiqueteVender.setNumero(numeroTiquetes);
                     tiquetesVehiculo[i]=tiqueteVender;
                     c.getTiquetes().add(tiqueteVender);
                     v.getTiqueteDAO().agregar(null, null, v, tiqueteVender);
@@ -732,9 +740,34 @@ public class RutasSuroccidente {
          * @param placa la placa del vehiculo a cancelar
          * @param identificacion el numero de identificacion del cliente a cancelar
          */
-        public void cancelarVentaDeTiqueteACliente(Tiquete tiqueteCancelar, String placa, int identificacion){
-            Vehiculo v=buscarVehiculo(placa);
-            Cliente c= buscarCliente(identificacion);
+        public void cancelarVentaDeTiqueteACliente(Tiquete tiqueteCancelar){
+            Cliente c=null;
+            for(int i=0;i<clientes.size();i++){
+                Cliente cliente = clientes.get(i);
+                ArrayList<Tiquete> misTiquetes = cliente.getTiquetes();
+                for(int j=0;j<misTiquetes.size();j++){
+                    if(misTiquetes.get(j).getNumero()==tiqueteCancelar.getNumero()){
+                        c=cliente;
+                    }
+                }
+            }
+            Vehiculo v=null;
+            for(int i=0;i< marcas.size();i++){
+                ArrayList<Linea> misLineas = marcas.get(i).getLineas();
+                for(int j=0;j<misLineas.size();j++){
+                    ArrayList<Vehiculo> misVehiculos = misLineas.get(j).getVehiculos();
+                    for(int k=0;k< misVehiculos.size();k++){
+                        Tiquete[] misTiquetes = misVehiculos.get(k).getTiquetes();
+                        for(int m=0;m<misTiquetes.length;m++){
+                            if(misTiquetes[m]!=null){
+                                if(misTiquetes[m].getNumero()==tiqueteCancelar.getNumero()){
+                                    v=misVehiculos.get(k);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
             
             Tiquete[] tiquetesVehiculo=v.getTiquetes();
             for(int i=0;i<tiquetesVehiculo.length;i++){
@@ -742,7 +775,6 @@ public class RutasSuroccidente {
                     if(tiquetesVehiculo[i].getNumero()== tiqueteCancelar.getNumero()){
                         tiquetesVehiculo[i]=null;
                         c.getTiquetes().remove(tiqueteCancelar);
-                        
                         v.getTiqueteDAO().agregar(null, null, v, tiqueteCancelar);
                         c.getTiqueteDAO().agregar(null, null, c, tiqueteCancelar);
                     }
