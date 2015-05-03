@@ -24,7 +24,7 @@ public class ReporteNumeroTiequetesVendidos extends Controller{
      */
     public ReporteNumeroTiequetesVendidos() {
         listaVehiculosConRuta= new ArrayList<>();
-        mundo.darInstancia();
+        super.darInstanciaMundo();
         restablecerListas();
     }
     public void restablecerListas(){
