@@ -31,7 +31,7 @@ import modelo.mundo.Vehiculo;
 @RequestScoped
 @SessionScoped
 @ApplicationScoped
-public class GestionarTiquetes extends Controller{
+public class GestionarTiquete extends Controller{
 
     private Tiquete tiqueteAgregar;
     private String horaVenta;
@@ -42,7 +42,7 @@ public class GestionarTiquetes extends Controller{
     /**
      * Creates a new instance of GestionarTiquetes
      */
-    public GestionarTiquetes() {
+    public GestionarTiquete() {
         super.darInstanciaMundo();
         tiqueteAgregar= new Tiquete(null, 0, 0);
         vehiculosConRuta= new ArrayList<>();
@@ -75,10 +75,58 @@ public class GestionarTiquetes extends Controller{
             mundo.venderTiqueteACliente(tiqueteAgregar, placa, identificacion);
             restablecerListas();
         } catch (ParseException ex) {
-            Logger.getLogger(GestionarTiquetes.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GestionarTiquete.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     public void canelarVentaTiquete(Tiquete tiqueteCancelar){
         mundo.cancelarVentaDeTiqueteACliente(tiqueteCancelar);
+    }
+
+    public Tiquete getTiqueteAgregar() {
+        return tiqueteAgregar;
+    }
+
+    public void setTiqueteAgregar(Tiquete tiqueteAgregar) {
+        this.tiqueteAgregar = tiqueteAgregar;
+    }
+
+    public String getHoraVenta() {
+        return horaVenta;
+    }
+
+    public void setHoraVenta(String horaVenta) {
+        this.horaVenta = horaVenta;
+    }
+
+    public int getIdentificacion() {
+        return identificacion;
+    }
+
+    public void setIdentificacion(int identificacion) {
+        this.identificacion = identificacion;
+    }
+
+    public String getPlaca() {
+        return placa;
+    }
+
+    public void setPlaca(String placa) {
+        this.placa = placa;
+    }
+
+    public ArrayList<Vehiculo> getVehiculosConRuta() {
+        return vehiculosConRuta;
+    }
+
+    public void setVehiculosConRuta(ArrayList<Vehiculo> vehiculosConRuta) {
+        this.vehiculosConRuta = vehiculosConRuta;
+    }
+
+    public ArrayList<Cliente> getClientes() {
+        return clientes;
+    }
+
+    public void setClientes(ArrayList<Cliente> clientes) {
+        this.clientes = clientes;
     }
 }

@@ -39,4 +39,7 @@ public class PanelControl extends Controller{
     public void redireccionarAsignarRutaTurno(){
         super.redireccionarVista("asignarRutaTurno.xhtml");
     }
+    public void redireccionarGestionarTiquete(){
+        super.redireccionarVista("gestionarTiquete.xhtml");
+    }
 }
