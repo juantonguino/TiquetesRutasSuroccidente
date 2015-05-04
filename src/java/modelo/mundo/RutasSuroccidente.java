@@ -790,7 +790,15 @@ public class RutasSuroccidente {
          * @return el numero de tiquetes vendidos
          */
         public int reportarNumeroTiquetesVendidosDeVehiculoPorRutaTurno(String placa){
-            return 0;
+            int contador=0;
+            Vehiculo v = buscarVehiculo(placa);
+            Tiquete[] misTiquetes = v.getTiquetes();
+            for(int i=0;i<misTiquetes.length;i++){
+                if(misTiquetes[i]!=null){
+                    contador++;
+                }
+            }
+            return contador;
         }
         
         
@@ -801,7 +809,27 @@ public class RutasSuroccidente {
          * @return el numero de tiqutes vendidos por una ruta y un turno pasadas como parametro
          */
         public double reportarValorTotalVentaTiquetesParaRutaTurno(RutaTurno rutaReportar){
-            return 0;
+            int contador = 0;
+            for(int i=0;i<marcas.size();i++){
+                ArrayList<Linea> misLineas = marcas.get(i).getLineas();
+                for(int j=0;j< misLineas.size();j++){
+                    ArrayList<Vehiculo> misVehiculos = misLineas.get(j).getVehiculos();
+                    for(int k=0;k<misVehiculos.size();k++){
+                        RutaTurno ruta = misVehiculos.get(k).getRutaTurno();
+                        if(ruta!=null){
+                            if(ruta.getCiudadDestino().equalsIgnoreCase(rutaReportar.getCiudadDestino())&& ruta.getCiudadOrigen().equalsIgnoreCase(rutaReportar.getCiudadOrigen())&&ruta.getHoraSalida().equals(rutaReportar.getHoraSalida())){
+                                Tiquete[] misTiquetes = misVehiculos.get(k).getTiquetes();
+                                for(int m=0;m<misTiquetes.length;m++){
+                                    if(misTiquetes[m]!=null){
+                                        contador++;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            return contador;
         }
         public ArrayList<RutaTurno> seleccionarRutasDistintas(){
             ArrayList<RutaTurno> listaRepetida = new ArrayList<RutaTurno>();
