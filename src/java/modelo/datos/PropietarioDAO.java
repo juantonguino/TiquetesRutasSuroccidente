@@ -5,8 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import modelo.mundo.Propietario;
 import modelo.mundo.Vehiculo;
 
@@ -14,8 +12,7 @@ import modelo.mundo.Vehiculo;
  * Clase encargada de almacenar información de los propietarios de las vehículos en la base de datos
  */
 public class PropietarioDAO {
-	
-<<<<<<< HEAD
+
 		
     /**
      * Metodo encargado de instanciar un objeto de la clase Propietario
@@ -41,40 +38,6 @@ public class PropietarioDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-=======
-	/**
-	 * Atributo encargado de enlazar la clase FachadaDB
-	 */
-	private FachadaDB fachada;
-	
-	/**
-	 * Metodo constructor de la clase PropietarioDAO
-         * <post:> Inicializar los atributos
-	 */
-	public PropietarioDAO() {
-            // TODO Auto-generated constructor stub
-            fachada= new FachadaDB();
-	}
-	
-	/**
-	 * Metodo encargado de instanciar un objeto de la clase Propietario
-     * @param nMarca
-     * @param nLinea
-	 * @param nVehiculo != null Objeto de la clase Vehiculo
-	 * @return  Debe ser un objeto de tipo Propietario
-         * <pre:> Tener inicializado el enlace a la clase FachadaDB <br>
-         * <post:> Realizar seleccion de un propietario de la base de datos <br>
-	 */
-	public Propietario seleccionar(Vehiculo nVehiculo) {
-		Propietario p = null;
-                String seleccionar = "select propietario.identificacion, propetario.nombres, propetario.apellidos, propetario.direccion, propetario.telefono"
-                                    + " from propietario "
-                                    + " where propietario.vehiculo_placa = " + nVehiculo.getPlaca()
-                                    + " order by propietario.nombres asc;";
-                PreparedStatement ps;
-                Connection con;
-                ResultSet res;
->>>>>>> origin/master
             try {
                 if (con != null) {
                     con.close();

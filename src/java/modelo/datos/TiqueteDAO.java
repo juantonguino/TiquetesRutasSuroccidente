@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import modelo.mundo.*;
 
 
@@ -13,43 +15,67 @@ import modelo.mundo.*;
  */
 public class TiqueteDAO {
 	
-	
-<<<<<<< HEAD
     /**
      * Metodo encargado de instanciar un objeto de la clase Tiquete
-     * @param nMarca
-     * @param nLinea
      * @param nVehiculo
      * @return Debe ser un objeto de tipo Tiquete
      */
-    public Tiquete seleccionar(Marca nMarca, Linea nLinea, Vehiculo nVehiculo){
+    public Tiquete seleccionar(Vehiculo nVehiculo){
         PreparedStatement ps;
         FachadaDB bd = new FachadaDB();
         Connection con = bd.crearConexion();
         Statement st = null;
         ResultSet res = null;
-        Tiquete t;
-        return null;
+        Tiquete t = null;
+        try {
+            String query = "SELECT * FROM tiquete WHERE vehiculo = " + nVehiculo.getPlaca();
+            st = con.createStatement();
+            res = st.executeQuery(query);
+            while(res.next()){
+                t = new Tiquete(res.getTime("hora_venta"), res.getDouble("valor_tiquete"), res.getInt("numero"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (con != null) {
+                    con.close();
+                }
+                if (st != null) {
+                    st.close();
+                }
+                if (res != null) {
+                    res.close();
+                }
+            } catch (Exception exe) {
+                exe.printStackTrace();
+            }
+        }  
+        return t;
     }
     
     
     /**
      * Metodo encargado de agregar un tiquete en la base de datos
+     * @param nVehiculo
      * @param nTiquete
+     * @param nCliente
      */
-    public void agregar(Tiquete nTiquete){
+    public void agregar(Vehiculo nVehiculo, Tiquete nTiquete, Cliente nCliente){
         Connection con = null;
         Statement st = null;
-        String query = "INSERT INTO tiquete (numero, hora_venta, valor_tiquete)"
+        String query = "INSERT INTO tiquete (numero, hora_venta, valor_tiquete, vehiculo, cliente)"
                 + " VALUES (" + nTiquete.getNumero() + ", "
-                + nTiquete.getHoraVenta().getTime() + ", "
-                + nTiquete.getValorTiquete() + ")";
+                + new SimpleDateFormat(RutasSuroccidente.FORMATO_HORAS).format(nTiquete.getHoraVenta()) + ", "
+                + nTiquete.getValorTiquete()
+                + "'" + nVehiculo.getPlaca() + "', "
+                + nCliente.getIdentificacion() + ")";
         try {
             FachadaDB bd = new FachadaDB();
             con = bd.crearConexion();
             st = con.prepareStatement(query);
             st.executeQuery(query);
-            System.out.println("Se ha agregado un cliente nuevo tiquete");
+            System.out.println("Se ha agregado un nuevo tiquete de número: " + nTiquete.getNumero());
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -73,9 +99,6 @@ public class TiqueteDAO {
 
     /**
      * Metodo encargado de actualizar la información de un tiquete en la base de datos
-     * @param nMarca
-     * @param nLinea
-     * @param nVehiculo
      * @param nTiquete
      */
     public void actualizar(Tiquete nTiquete){
@@ -89,7 +112,7 @@ public class TiqueteDAO {
             con = bd.crearConexion();
             st = con.prepareStatement(query);
             st.executeQuery(query);
-             System.out.println("Se ha modificado el tiquete");
+             System.out.println("Se ha modificado el tiquetede número: " + nTiquete.getNumero());
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -113,12 +136,9 @@ public class TiqueteDAO {
 
     /**
      * Metodo encargado de eliminar un tiquete en la base de datos
-     * @param nMarca
-     * @param nLinea
-     * @param nVehiculo
      * @param nTiquete
      */
-    public void eliminar(Marca nMarca, Linea nLinea, Vehiculo nVehiculo, Tiquete nTiquete){
+    public void eliminar(Tiquete nTiquete){
         Connection con = null;
         Statement st = null;
         String query = "DELETE FROM tiquete  WHERE numero = " + nTiquete.getNumero();
@@ -127,7 +147,7 @@ public class TiqueteDAO {
             con = bd.crearConexion();
             st = con.prepareStatement(query);
             st.executeQuery(query);
-             System.out.println("Se ha eliminado el tiquete");
+             System.out.println("Se ha eliminado el tiquete de número: " + nTiquete.getNumero());
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -147,114 +167,4 @@ public class TiqueteDAO {
             }
         }
     }
-=======
-	/**
-	 * Atributo encargado de enlazar la clase FachadaDB
-	 */
-	private FachadaDB fachada;
-	
-	
-	/**
-	 * Metodo constructor de la clase TiqueteDAO
-	 */
-	public TiqueteDAO() {
-		// TODO Auto-generated constructor stub
-	}
-	
-	
-	/**
-	 * Metodo encargado de instanciar un objeto de la clase Tiquete
-	 * @param nMarca
-	 * @param nLinea
-	 * @param nVehiculo
-	 * @return Debe ser un objeto de tipo Tiquete
-	 */
-	public Tiquete seleccionar(Marca nMarca, Linea nLinea, Vehiculo nVehiculo){
-		return null;
-	}
-	
-	
-	/**
-	 * Metodo encargado de actualizar la información de un tiquete en la base de datos
-	 * @param nMarca
-	 * @param nLinea
-	 * @param nVehiculo
-	 * @param nTiquete
-	 */
-	public void actualizar(Marca nMarca, Linea nLinea, Vehiculo nVehiculo, Tiquete nTiquete){
-		
-	}
-	
-	
-	/**
-	 * Metodo encargado de agregar un tiquete en la base de datos
-	 * @param nMarca
-	 * @param nLinea
-	 * @param nVehiculo
-	 * @param nTiquete
-	 */
-	public void agregar(Marca nMarca, Linea nLinea, Vehiculo nVehiculo, Tiquete nTiquete){
-		
-	}
-	
-	
-	/**
-	 * Metodo encargado de eliminar un tiquete en la base de datos
-	 * @param nMarca
-	 * @param nLinea
-	 * @param nVehiculo
-	 * @param nTiquete
-	 */
-	public void eliminar(Marca nMarca, Linea nLinea, Vehiculo nVehiculo, Tiquete nTiquete){
-		
-	}
-        
-        
-        /**
-	 * Metodo encargado de instanciar un objeto de la clase Tiquete
-	 * @param nMarca
-	 * @param nLinea
-	 * @param nVehiculo
-	 * @return Debe ser un objeto de tipo Tiquete
-	 */
-	public Tiquete seleccionar(Marca nMarca, Linea nLinea, Cliente nCliente){
-		return null;
-	}
-	
-	
-	/**
-	 * Metodo encargado de actualizar la información de un tiquete en la base de datos
-	 * @param nMarca
-	 * @param nLinea
-	 * @param nVehiculo
-	 * @param nTiquete
-	 */
-	public void actualizar(Marca nMarca, Linea nLinea, Cliente nCliente, Tiquete nTiquete){
-		
-	}
-	
-	
-	/**
-	 * Metodo encargado de agregar un tiquete en la base de datos
-	 * @param nMarca
-	 * @param nLinea
-	 * @param nVehiculo
-	 * @param nTiquete
-	 */
-	public void agregar(Marca nMarca, Linea nLinea, Cliente nCliente, Tiquete nTiquete){
-		
-	}
-	
-	
-	/**
-	 * Metodo encargado de eliminar un tiquete en la base de datos
-	 * @param nMarca
-	 * @param nLinea
-	 * @param nVehiculo
-	 * @param nTiquete
-	 */
-	public void eliminar(Marca nMarca, Linea nLinea, Cliente nCliente, Tiquete nTiquete){
-		
-	}
->>>>>>> origin/master
 }
