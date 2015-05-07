@@ -2,12 +2,10 @@ package modelo.datos;
 
 import java.awt.image.BufferedImage;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import modelo.mundo.*;
 
 
@@ -15,131 +13,165 @@ import modelo.mundo.*;
  * Clase encargada de almacenar informacion de los vehiculos en la base de datos
  */
 public class VehiculoDAO {
-	
-	
-	/**
-	 * Atributo encargado de enlazar la clase FachadaDB
-	 */
-	private FachadaDB fachada;
-	
-	
-	/**
-	 * Metodo constructor de la clase VehiculoDAO
-         * <post:> Inicializar los atributos
-	 */
-	public VehiculoDAO() {
-		// TODO Auto-generated constructor stub
-	}
-	
-	
-	/**
-	 * Lista almacenadora de objetos de tipo Vehiculo
-	 * @param nMarca != null Objeto de la clase Marca
-	 * @param nLinea != null Objeto de la clase Linea
-	 * @return  Lista de vehículos.
-         * <pre:> Tener inicializado el enlace a la clase FachadaDB <br>
-         * <post:> Realizar seleccion de los vehículos de una marca y una linea dada de la base de datos <br>
-         */
-	public ArrayList<Vehiculo> seleccionar(Marca nMarca, Linea nLinea)  {
-            ArrayList<Vehiculo> vehiculos;
-            vehiculos = new ArrayList();
-            String seleccionar="select vehiculo.modelo, vehiculo.placa, vehiculo.numero_pasajeros, vehiculo.fotografia from vehiculo, linea "
-                            + " where vehiculo.linea_nombre = " + nLinea.getNombre()
-                            + " and linea.nombre_marca = " + nMarca.getNombre() + ";";
-            Connection con;
-            PreparedStatement ps;
-            ResultSet res;
+
+
+    /**
+     * Lista almacenadora de objetos de tipo Vehiculo
+     * @param nMarca != null Objeto de la clase Marca
+     * @param nLinea != null Objeto de la clase Linea
+     * @return  Lista de vehículos.
+     * <pre:> Tener inicializado el enlace a la clase FachadaDB <br>
+     * <post:> Realizar seleccion de los vehículos de una marca y una linea dada de la base de datos <br>
+     */
+    public ArrayList<Vehiculo> seleccionar(Marca nMarca, Linea nLinea)  {
+        FachadaDB bd = new FachadaDB();
+        Connection con = bd.crearConexion();
+        Statement st = null;
+        ResultSet res = null;
+        ArrayList<Vehiculo> vehiculos = new ArrayList();
+        try {
+            String query = "SELECT * FROM vehiculo";
+            st = con.createStatement();
+            res = st.executeQuery(query);
+            while(res.next()){ 
+                vehiculos.add(new Vehiculo(res.getInt("modelo"), res.getString("placa"), res.getInt("numero_pasajeros"), (BufferedImage) res.getBlob("fotografia")));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
             try {
-                con = fachada.conectarDB();
-                ps = con.prepareStatement(seleccionar);
-                res = ps.executeQuery();
-                
-                while(res.next()){
-                    vehiculos.add(new Vehiculo(res.getInt(1), res.getString(2), res.getInt(3), (BufferedImage) res.getBlob(4)));
+                if (con != null) {
+                    con.close();
                 }
-                fachada.desconectarDB(con);
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(VehiculoDAO.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (SQLException ex) {
-                Logger.getLogger(VehiculoDAO.class.getName()).log(Level.SEVERE, null, ex);
+                if (st != null) {
+                    st.close();
+                }
+                if (res != null) {
+                    res.close();
+                }
+            } catch (Exception exe) {
+                exe.printStackTrace();
             }
-            
-            return vehiculos;
-	}
-	
-	
-	/**
-	 * Metodo encargado de actualizar la información de un vehículo en la base de datos
-	 * @param nMarca != null Objeto de la clase Marca
-	 * @param nLinea != null Objeto de la clase Linea
-	 * @param nVehiculo != null Objeto de la clase Vehiculo
-         */
-	public void actualizar(Marca nMarca, Linea nLinea, Vehiculo nVehiculo)  {
-            String actualizar= "update vehiculo "
-                                + "set vehiculo.modelo = " + nVehiculo.getModelo() + ", vehiculo.numero_pasajeros = " + nVehiculo.getNumeroPasajeros() + ", vehiculo.fotografia = " + nVehiculo.getFotografia()
-                                + " where vehiculo.linea_nombre = " + nLinea.getNombre() 
-                                + " and vehiculo.placa = " + nVehiculo.getPlaca();
-            Connection con; 
-            PreparedStatement ps;
-            try {
-                con = fachada.conectarDB();
-                ps = con.prepareStatement(actualizar);
-                fachada.desconectarDB(con);
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(MarcaDAO.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (SQLException ex) {
-                Logger.getLogger(MarcaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }  
+        return vehiculos;
+    }
+    
+    
+    /**
+     * Metodo encargado de agregar un vehículo en la base de datos
+     * @param nLinea != null Objeto de la clase Linea
+     * @param nVehiculo != null Objeto de la clase Vehiculo
+     */
+    public void agregar(Marca nMarca, Linea nLinea, Vehiculo nVehiculo, Propietario nPropietario) {
+        Connection con = null;
+        Statement st = null;
+        String query = "INSERT INTO vehiculo (placa, modelo, numero_pasajeros, fotografia)"
+                + " VALUES ('" + nVehiculo.getPlaca() + "',"
+                + " '" + nVehiculo.getModelo() + "',"
+                + " '" + nVehiculo.getNumeroPasajeros() + "',"
+                + " '" + nVehiculo.getFotografia() + "')";
+        try {
+            FachadaDB bd = new FachadaDB();
+            con = bd.crearConexion();
+            st = con.prepareStatement(query);
+            st.executeQuery(query);
+            System.out.println("Se ha agregado un vehiculo con la placa: " + nVehiculo.getPlaca());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (st != null) {
+                try {
+                    st.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
             }
-	
-		
-	}
-	
-	
-	/**
-	 * Metodo encargado de agregar un vehículo en la base de datos
-	 * @param nLinea != null Objeto de la clase Linea
-	 * @param nVehiculo != null Objeto de la clase Vehiculo
-         */
-	public void agregar(Marca nMarca, Linea nLinea, Vehiculo nVehiculo) {
-            String agregar= "insert into vehiculo (vehiculo.placa, vehiculo.modelo, vehiculo.numero_pasajeros, vehiculo.fotografia, vehiculo.linea_nombre) "
-                        + "values ( " + nVehiculo.getPlaca() + ", " + nVehiculo.getModelo() + ", " + nVehiculo.getNumeroPasajeros() + ", " + nVehiculo.getFotografia() + ", " + nLinea.getNombre() + ");";
-            Connection con; 
-            PreparedStatement ps;
-            try {
-                con = fachada.conectarDB();
-                ps = con.prepareStatement(agregar);
-                fachada.desconectarDB(con);
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(MarcaDAO.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (SQLException ex) {
-                Logger.getLogger(MarcaDAO.class.getName()).log(Level.SEVERE, null, ex);
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
             }
-		
-		
-	}
-	
-	
-	/**
-	 * Metodo encargado de eliminar un vehículo en la base de datos
-	 * @param nMarca != null Objeto de la clase Marca
-	 * @param nLinea != null Objeto de la clase Linea
-	 * @param nVehiculo != null Objeto de la clase Vehiculo
-         */
-	public void eliminar(Marca nMarca, Linea nLinea, Vehiculo nVehiculo) {
-            String eliminar= "delete from vehiculo "
-                            + "where vehiculo.placa = " + nVehiculo.getPlaca()
-                            + " and vehiculo.linea_nombre = " + nLinea.getNombre();
-            Connection con; 
-            PreparedStatement ps;
-            try {
-                con = fachada.conectarDB();
-                ps = con.prepareStatement(eliminar);
-                fachada.desconectarDB(con);
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(MarcaDAO.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (SQLException ex) {
-                Logger.getLogger(MarcaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+
+    /**
+     * Metodo encargado de actualizar la información de un vehículo en la base de datos
+     * @param nMarca != null Objeto de la clase Marca
+     * @param nLinea != null Objeto de la clase Linea
+     * @param nVehiculo != null Objeto de la clase Vehiculo
+     */
+    public void actualizar(Marca nMarca, Linea nLinea, Vehiculo nVehiculo)  {
+        Connection con = null;
+        Statement st = null;
+        String query = "UPDATE vehiculo SET modelo = '" + nVehiculo.getModelo() + "'"
+                + ", numero_pasajeros = '" + nVehiculo.getNumeroPasajeros() + "'"
+                + ", fotografia = '" + nVehiculo.getFotografia() + "'"
+                + " WHERE placa = '" + nVehiculo.getPlaca() + "'";
+        try {
+            FachadaDB bd = new FachadaDB();
+            con = bd.crearConexion();
+            st = con.prepareStatement(query);
+            st.executeQuery(query);
+             System.out.println("Se ha modificado el vehículo con la placa: " + nVehiculo.getPlaca());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (st != null) {
+                try {
+                    st.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
             }
-		
-	}
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+
+    /**
+     * Metodo encargado de eliminar un vehículo en la base de datos
+     * @param nMarca != null Objeto de la clase Marca
+     * @param nLinea != null Objeto de la clase Linea
+     * @param nVehiculo != null Objeto de la clase Vehiculo
+     */
+    public void eliminar(Marca nMarca, Linea nLinea, Vehiculo nVehiculo) {
+        Connection con = null;
+        Statement st = null;
+        String query = "DELETE FROM vehiculo  WHERE placa = '" + nVehiculo.getPlaca() + "'";
+        try {
+            FachadaDB bd = new FachadaDB();
+            con = bd.crearConexion();
+            st = con.prepareStatement(query);
+            st.executeQuery(query);
+             System.out.println("Se ha eliminado el vehiculo con la placa: " + nVehiculo.getPlaca() );
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (st != null) {
+                try {
+                    st.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+    
+
 }
