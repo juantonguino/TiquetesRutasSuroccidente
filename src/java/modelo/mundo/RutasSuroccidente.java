@@ -726,8 +726,8 @@ public class RutasSuroccidente {
                     tiqueteVender.setNumero(numeroTiquetes);
                     tiquetesVehiculo[i]=tiqueteVender;
                     c.getTiquetes().add(tiqueteVender);
-                    v.getTiqueteDAO().agregar(null, null, v, tiqueteVender);
-                    c.getTiqueteDAO().agregar(null, null, c, tiqueteVender);
+                    v.getTiqueteDAO().agregar(v, tiqueteVender,c);
+                    //c.getTiqueteDAO().agregar(null, null, c, tiqueteVender);
                 }
             }
         }
@@ -775,8 +775,8 @@ public class RutasSuroccidente {
                     if(tiquetesVehiculo[i].getNumero()== tiqueteCancelar.getNumero()){
                         tiquetesVehiculo[i]=null;
                         c.getTiquetes().remove(tiqueteCancelar);
-                        v.getTiqueteDAO().agregar(null, null, v, tiqueteCancelar);
-                        c.getTiqueteDAO().agregar(null, null, c, tiqueteCancelar);
+                        v.getTiqueteDAO().eliminar(tiqueteCancelar);
+                        //c.getTiqueteDAO().agregar(null, null, c, tiqueteCancelar);
                     }
                 }
             }
