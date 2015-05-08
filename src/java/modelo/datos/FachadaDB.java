@@ -47,8 +47,8 @@ public class FachadaDB {
      */
     public FachadaDB(){
         baseDeDatos = "tiquetes";
-        clave = "mysql";
-        usuario = "root";
+        clave = "tiquete";
+        usuario = "123";
         url = "jdbc:mysql://localhost/"+baseDeDatos;
     }
     

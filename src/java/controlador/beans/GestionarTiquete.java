@@ -39,6 +39,7 @@ public class GestionarTiquete extends Controller{
     private String placa;
     private ArrayList<Vehiculo> vehiculosConRuta;
     private ArrayList<Cliente> clientes;
+    private ArrayList<Tiquete> tiquetes;
     /**
      * Creates a new instance of GestionarTiquetes
      */
@@ -77,6 +78,11 @@ public class GestionarTiquete extends Controller{
         } catch (ParseException ex) {
             Logger.getLogger(GestionarTiquete.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    public String verTiquetes(Cliente cliente){
+        tiquetes= new ArrayList<>();
+        tiquetes= cliente.getTiquetes();
+        return "verTiquetes";
     }
     public void canelarVentaTiquete(Tiquete tiqueteCancelar){
         mundo.cancelarVentaDeTiqueteACliente(tiqueteCancelar);

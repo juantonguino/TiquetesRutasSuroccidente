@@ -29,6 +29,35 @@
                 <h:inputText value="#{gestionarTiquete.tiqueteAgregar.valorTiquete}"/>
                 <h:commandButton value="Vender Tiquete" actionListener="#{gestionarTiquete.venderTiquete()}"/>
             </h:panelGrid>
+            <h:dataTable value="#{gestionarTiquete.clientes}" var="cliente">
+                <h:dataTable value="#{cliente.tiquetes}" var="tiquete">
+                    <h:column>
+                    <f:facet name="header">
+                        <h:outputLabel value="Identificacion"/>
+                    </f:facet>
+                    <h:outputLabel value="#{cliente.identificacion}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputLabel value="Nombres"/>
+                    </f:facet>
+                    <h:outputLabel value="#{cliente.nombres}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputLabel value="Apellidos"/>
+                        </f:facet>
+                        <h:outputLabel value="#{cliente.apellidos}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputLabel value="Ver Tiquetes"/>
+                        </f:facet>
+                        <h:commandButton value="Ver Tiquetes" action="#{gestionarTiquete.verTiquetes(cliente)}"/>
+                    </h:column>
+                </h:dataTable>
+            </h:dataTable>
+            <h:commandButton value="Panel Control" action="index.xhtml"/>
             <h:commandButton value="Panel Control" action="index.xhtml"/>
         </h:form>
     </h:body>
