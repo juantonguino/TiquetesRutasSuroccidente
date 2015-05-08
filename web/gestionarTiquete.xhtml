@@ -20,7 +20,7 @@
                     <f:selectItems value="#{gestionarTiquete.vehiculosConRuta}" var="vehiculo" itemValue="#{vehiculo.placa}" itemLabel="#{vehiculo.placa}"/>
                 </h:selectOneMenu>
                 <h:outputLabel value="Identificacion Cliente"/>
-                <h:selectOneMenu style="margin-left: 20px" value="#{gestionarTiquete.clientes}">
+                <h:selectOneMenu style="margin-left: 20px" value="#{gestionarTiquete.identificacion}">
                     <f:selectItems value="#{gestionarTiquete.clientes}" var="cliente" itemValue="#{cliente.identificacion}" itemLabel="#{cliente.nombres}"/>
                 </h:selectOneMenu>
                 <h:outputLabel value="Hora Venta"/>
@@ -30,8 +30,7 @@
                 <h:commandButton value="Vender Tiquete" actionListener="#{gestionarTiquete.venderTiquete()}"/>
             </h:panelGrid>
             <h:dataTable value="#{gestionarTiquete.clientes}" var="cliente">
-                <h:dataTable value="#{cliente.tiquetes}" var="tiquete">
-                    <h:column>
+                <h:column>
                     <f:facet name="header">
                         <h:outputLabel value="Identificacion"/>
                     </f:facet>
@@ -46,18 +45,16 @@
                 <h:column>
                     <f:facet name="header">
                         <h:outputLabel value="Apellidos"/>
-                        </f:facet>
-                        <h:outputLabel value="#{cliente.apellidos}"/>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputLabel value="Ver Tiquetes"/>
-                        </f:facet>
-                        <h:commandButton value="Ver Tiquetes" action="#{gestionarTiquete.verTiquetes(cliente)}"/>
-                    </h:column>
-                </h:dataTable>
+                    </f:facet>
+                    <h:outputLabel value="#{cliente.apellidos}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputLabel value="Ver Tiquetes"/>
+                    </f:facet>
+                    <h:commandButton value="Ver Tiquetes" action="#{gestionarTiquete.verTiquetes(cliente)}"/>
+                </h:column>
             </h:dataTable>
-            <h:commandButton value="Panel Control" action="index.xhtml"/>
             <h:commandButton value="Panel Control" action="index.xhtml"/>
         </h:form>
     </h:body>

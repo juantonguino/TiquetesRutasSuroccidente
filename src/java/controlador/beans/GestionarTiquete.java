@@ -37,6 +37,7 @@ public class GestionarTiquete extends Controller{
     private String horaVenta;
     private int identificacion;
     private String placa;
+    private Cliente clienteTiquete;
     private ArrayList<Vehiculo> vehiculosConRuta;
     private ArrayList<Cliente> clientes;
     private ArrayList<Tiquete> tiquetes;
@@ -51,7 +52,6 @@ public class GestionarTiquete extends Controller{
         restablecerListas();
     }
     public void restablecerListas(){
-        clientes.clear();
         clientes= mundo.getClientes();
         vehiculosConRuta.clear();
         for(int i=0; i<mundo.getMarcas().size();i++){
@@ -79,13 +79,26 @@ public class GestionarTiquete extends Controller{
             Logger.getLogger(GestionarTiquete.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    public void restablecerListaTiquetes(Cliente cliente){
+        ArrayList<Cliente> clientesMundo= mundo.getClientes();
+        for(int i=0;i<clientesMundo.size();i++){
+            Cliente miCliente =clientesMundo.get(i);
+            if(cliente.getIdentificacion()== miCliente.getIdentificacion()){
+                tiquetes= miCliente.getTiquetes();
+            }
+        }
+    }
     public String verTiquetes(Cliente cliente){
         tiquetes= new ArrayList<>();
-        tiquetes= cliente.getTiquetes();
+        //tiquetes= cliente.getTiquetes();
+        restablecerListaTiquetes(cliente);
+        clienteTiquete= cliente;
         return "verTiquetes";
     }
-    public void canelarVentaTiquete(Tiquete tiqueteCancelar){
+    public String canelarVentaTiquete(Tiquete tiqueteCancelar){
         mundo.cancelarVentaDeTiqueteACliente(tiqueteCancelar);
+        restablecerListaTiquetes(clienteTiquete);
+        return "verTiquetes.xhtml";
     }
 
     public Tiquete getTiqueteAgregar() {
@@ -135,4 +148,13 @@ public class GestionarTiquete extends Controller{
     public void setClientes(ArrayList<Cliente> clientes) {
         this.clientes = clientes;
     }
+
+    public ArrayList<Tiquete> getTiquetes() {
+        return tiquetes;
+    }
+
+    public void setTiquetes(ArrayList<Tiquete> tiquetes) {
+        this.tiquetes = tiquetes;
+    }
+    
 }

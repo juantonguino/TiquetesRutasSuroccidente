@@ -717,16 +717,18 @@ public class RutasSuroccidente {
          * @param identificacion el numero de identificacion del clinte
          */
         public void venderTiqueteACliente(Tiquete tiqueteVender, String placa, int identificacion){
+            boolean bandera=false;
             Vehiculo v=buscarVehiculo(placa);
             Cliente c= buscarCliente(identificacion);
             Tiquete[] tiquetesVehiculo=v.getTiquetes();
-            for(int i=0;i<tiquetesVehiculo.length;i++){
+            for(int i=0;i<tiquetesVehiculo.length && bandera==false;i++){
                 if(tiquetesVehiculo[i]==null){
                     numeroTiquetes++;
                     tiqueteVender.setNumero(numeroTiquetes);
                     tiquetesVehiculo[i]=tiqueteVender;
                     c.getTiquetes().add(tiqueteVender);
                     v.getTiqueteDAO().agregar(v, tiqueteVender,c);
+                    bandera=true;
                     //c.getTiqueteDAO().agregar(null, null, c, tiqueteVender);
                 }
             }

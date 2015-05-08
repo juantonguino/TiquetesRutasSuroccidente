@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>GESTIONAR TIQUETES</title>
+        <link rel="stylesheet" type="text/css" href="../css/style.css" />
+    </h:head>
+    <h:body>
+        <h:form>
+            <div id="nom_pag9">
+                <a id="pro">
+                    <strong>Mostrar Tiquete</strong>
+                </a>
+            </div>
+            <h:dataTable value="#{gestionarTiquete.tiquetes}" var="tiquete">
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputLabel value="Numero Tiquete"/>
+                    </f:facet>
+                    <h:outputLabel value="#{tiquete.numero}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputLabel value="Valor Tiquete"/>
+                    </f:facet>
+                    <h:outputLabel value="#{tiquete.valorTiquete}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputLabel value="Hora Venta"/>
+                    </f:facet>
+                    <h:outputLabel value="#{tiquete.horaVenta}"/>
+                </h:column>
+                <h:column>
+                    <h:commandButton value="Cancelar" actionListener="#{gestionarTiquete.canelarVentaTiquete(tiquete)}"/>
+                </h:column>
+            </h:dataTable>
+            <h:commandButton value="Gestionar Tiquetes" action="gestionarTiquete.xhtml"/>
+            <h:commandButton value="Panel Control" action="index.xhtml"/>
+        </h:form>
+    </h:body>
+</html>
+
