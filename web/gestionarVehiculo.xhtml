@@ -65,8 +65,7 @@
                     <f:facet name="header">
                         <h:outputLabel value="Fotografia"/>
                     </f:facet>
-                    <p:graphicImage value="#{FacesContext.getCurrentInstance().getExternalContext().getContext()}/imagenes/#{vehiculo.fotografia}"/>
-                    <h:outputLabel value="Imagen"/>
+                    <p:graphicImage width="60" height="60" value="#{FacesContext.getCurrentInstance().getExternalContext().getContext()}/imagenes/#{vehiculo.fotografia}"/>
                 </h:column>
                 <h:column>
                     <h:commandButton value="Eliminar" actionListener="#{gestionarVehiculo.eliminar(vehiculo)}"/>

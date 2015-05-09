@@ -130,6 +130,12 @@ public class GestionarVehiculo extends Controller{
             outputStream =new FileOutputStream(new File(carpetaImgenes+"/"+this.vehiculoAgregar.getPlaca()+".png"));
             inputStream= imagenArchivo.getInputstream();
             vehiculoAgregar.setFotografia(this.vehiculoAgregar.getPlaca()+".png");
+            
+            int read=0;
+            byte[] bytes= new byte[1024];
+            while((read=inputStream.read(bytes))!=-1){
+                outputStream.write(bytes, 0, read);
+            }
         }
         catch(Exception e){
             e.printStackTrace();
@@ -160,6 +166,12 @@ public class GestionarVehiculo extends Controller{
             outputStream =new FileOutputStream(new File(carpetaImgenes+"/"+this.vehiculoModificar.getPlaca()+".png"));
             inputStream= imagenArchivoModificar.getInputstream();
             vehiculoAgregar.setFotografia(this.vehiculoModificar.getPlaca()+".png");
+            
+            int read=0;
+            byte[] bytes= new byte[1024];
+            while((read=inputStream.read(bytes))!=-1){
+                outputStream.write(bytes, 0, read);
+            }
         }
         catch(Exception e){
             e.printStackTrace();
