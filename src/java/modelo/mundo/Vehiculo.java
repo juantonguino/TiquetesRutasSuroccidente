@@ -19,7 +19,7 @@ public class Vehiculo {
 	/**
 	 * es el atributo imagen de un vehiculo
 	 */	
-	private BufferedImage fotografia;
+	private String fotografia;
 	
 	
 	/**
@@ -83,7 +83,7 @@ public class Vehiculo {
 	 * @param nNumeroPasajeros los pasajeros de un vehiculo nNumeroPasajeros !=""
 	 * @param nFotografia la fotografia de un vehiculo nFotografia !=""
 	 */
-	public Vehiculo(int nModelo, String nPlaca, int nNumeroPasajeros, BufferedImage nFotografia) {
+	public Vehiculo(int nModelo, String nPlaca, int nNumeroPasajeros, String nFotografia) {
 		this.fotografia=nFotografia;
 		this.modelo=nModelo;
 		this.numeroPasajeros=nNumeroPasajeros;
@@ -154,7 +154,7 @@ public class Vehiculo {
 	 * restorna la fotografia de un vehiculo
 	 * @return fotografia la fotografia de un vehiculo
 	 */
-	public BufferedImage getFotografia() {
+	public String getFotografia() {
 		return fotografia;
 	}
 	
@@ -163,7 +163,7 @@ public class Vehiculo {
 	 * establece la ffotografia para un vehiculo
 	 * @param fotografia la fotografia de un vehiculo !=""
 	 */
-	public void setFotografia(BufferedImage fotografia) {
+	public void setFotografia(String fotografia) {
 		this.fotografia = fotografia;
 	}
 	

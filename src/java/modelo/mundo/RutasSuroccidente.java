@@ -428,7 +428,7 @@ public class RutasSuroccidente {
 	 * @param nNumeroPasajeros el numero de pasajeros del vehiculos nNumeroPasajeros>0 
 	 * @param nFotografia la fotografia del vehiculo nFotografia !=null
 	 */
-	public void modificarVehiculo(int nModelo, int nNumeroPasajeros, BufferedImage nFotografia, String nPlaca){
+	public void modificarVehiculo(int nModelo, int nNumeroPasajeros, String nFotografia, String nPlaca){
             for(int i=0;i<marcas.size();i++){
                 Marca miMarca = marcas.get(i);
                 ArrayList<Linea> misLineas = miMarca.getLineas();
@@ -459,7 +459,7 @@ public class RutasSuroccidente {
 	 * @param nNumeroPasajeros el numero de pasajeros del vehiculos nNumeroPasajeros>0 
 	 * @param nFotografia la fotografia del vehiculo nFotografia !=null
 	 */
-	public void agregarVehiculo(String nLinea, int nModelo, String nPlaca, int nNumeroPasajeros, BufferedImage nFotografia){
+	public void agregarVehiculo(String nLinea, int nModelo, String nPlaca, int nNumeroPasajeros, String nFotografia){
             Vehiculo buscado = buscarVehiculo(nPlaca);
             if(buscado==null){
                 for(int i=0; i< marcas.size(); i++){

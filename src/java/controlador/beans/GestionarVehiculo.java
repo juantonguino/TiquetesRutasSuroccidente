@@ -5,15 +5,27 @@
  */
 package controlador.beans;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.ServletContext;
 import modelo.mundo.Linea;
 import modelo.mundo.Marca;
 import modelo.mundo.Vehiculo;
+import org.apache.tomcat.util.http.fileupload.UploadContext;
+import org.primefaces.model.UploadedFile;
 
 /**
  *
@@ -29,6 +41,8 @@ public class GestionarVehiculo extends Controller{
     private Vehiculo vehiculoBuscar;
     private Vehiculo vehiculoModificar;
     private String nombreLinea;
+    private UploadedFile imagenArchivo;
+    private UploadedFile imagenArchivoModificar;
     private static List<Linea> listaLineas;
     private static List<Vehiculo> listaVehiculos;
     /**
@@ -77,7 +91,8 @@ public class GestionarVehiculo extends Controller{
         }
     }
     public void agregar(){
-        mundo.agregarVehiculo(nombreLinea, vehiculoAgregar.getModelo(), vehiculoAgregar.getPlaca(), vehiculoAgregar.getNumeroPasajeros(), null);
+        cargarArchivoAgregar();
+        mundo.agregarVehiculo(nombreLinea, vehiculoAgregar.getModelo(), vehiculoAgregar.getPlaca(), vehiculoAgregar.getNumeroPasajeros(), vehiculoAgregar.getFotografia());
         restablecerListaVehiculos();
     }
     public void buscar(){
@@ -99,11 +114,72 @@ public class GestionarVehiculo extends Controller{
         return "modificarVehiculo.xhtml";
     }
     public void modificarVehiculo(){
-        mundo.modificarVehiculo(vehiculoModificar.getModelo(), vehiculoModificar.getNumeroPasajeros(), null, vehiculoModificar.getPlaca());
+        cargarArchivoMofificar();
+        mundo.modificarVehiculo(vehiculoModificar.getModelo(), vehiculoModificar.getNumeroPasajeros(), vehiculoModificar.getFotografia(), vehiculoModificar.getPlaca());
         super.redireccionarVista("gestionarVehiculo.xhtml");
     }
     public void irPanelControl(){
         super.redireccionarVista("index.xhtml");
+    }
+    public void cargarArchivoAgregar(){
+        InputStream inputStream= null;
+        OutputStream outputStream=null;
+        try{
+            ServletContext servletContext= (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
+            String carpetaImgenes= (String)servletContext.getRealPath("/imagenes");
+            outputStream =new FileOutputStream(new File(carpetaImgenes+"/"+this.vehiculoAgregar.getPlaca()+".png"));
+            inputStream= imagenArchivo.getInputstream();
+            vehiculoAgregar.setFotografia(this.vehiculoAgregar.getPlaca()+".png");
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        finally{
+            if(inputStream!=null){
+                try {
+                    inputStream.close();
+                } catch (IOException ex) {
+                    Logger.getLogger(GestionarVehiculo.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if(outputStream!=null){
+                try {
+                    outputStream.close();
+                } catch (IOException ex) {
+                    Logger.getLogger(GestionarVehiculo.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }
+    public void cargarArchivoMofificar(){
+        InputStream inputStream= null;
+        OutputStream outputStream=null;
+        try{
+            ServletContext servletContext= (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
+            String carpetaImgenes= (String)servletContext.getRealPath("/imagenes");
+            outputStream =new FileOutputStream(new File(carpetaImgenes+"/"+this.vehiculoModificar.getPlaca()+".png"));
+            inputStream= imagenArchivoModificar.getInputstream();
+            vehiculoAgregar.setFotografia(this.vehiculoModificar.getPlaca()+".png");
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        finally{
+            if(inputStream!=null){
+                try {
+                    inputStream.close();
+                } catch (IOException ex) {
+                    Logger.getLogger(GestionarVehiculo.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if(outputStream!=null){
+                try {
+                    outputStream.close();
+                } catch (IOException ex) {
+                    Logger.getLogger(GestionarVehiculo.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
     }
     //--------------------------------------------------------------------------
     //GETTERS AND SETTERS
@@ -156,4 +232,21 @@ public class GestionarVehiculo extends Controller{
     public void setListaVehiculos(List<Vehiculo> listaVehiculos) {
         GestionarVehiculo.listaVehiculos = listaVehiculos;
     }
+
+    public UploadedFile getImagenArchivo() {
+        return imagenArchivo;
+    }
+
+    public void setImagenArchivo(UploadedFile imagenArchivo) {
+        this.imagenArchivo = imagenArchivo;
+    }
+
+    public UploadedFile getImagenArchivoModificar() {
+        return imagenArchivoModificar;
+    }
+
+    public void setImagenArchivoModificar(UploadedFile imagenArchivoModificar) {
+        this.imagenArchivoModificar = imagenArchivoModificar;
+    }
+    
 }

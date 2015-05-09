@@ -34,7 +34,7 @@ public class VehiculoDAO {
             st = con.createStatement();
             res = st.executeQuery(query);
             while(res.next()){ 
-                vehiculos.add(new Vehiculo(res.getInt("modelo"), res.getString("placa"), res.getInt("numero_pasajeros"), (BufferedImage) res.getBlob("fotografia")));
+                vehiculos.add(new Vehiculo(res.getInt("modelo"), res.getString("placa"), res.getInt("numero_pasajeros"), res.getString("fotografia")));
             }
         } catch (SQLException e) {
             e.printStackTrace();
