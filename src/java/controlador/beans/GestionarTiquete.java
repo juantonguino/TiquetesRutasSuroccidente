@@ -18,7 +18,6 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import modelo.mundo.Cliente;
 import modelo.mundo.Linea;
-import modelo.mundo.Propietario;
 import modelo.mundo.RutasSuroccidente;
 import modelo.mundo.Tiquete;
 import modelo.mundo.Vehiculo;
@@ -88,12 +87,10 @@ public class GestionarTiquete extends Controller{
             }
         }
     }
-    public String verTiquetes(Cliente cliente){
-        tiquetes= new ArrayList<>();
-        //tiquetes= cliente.getTiquetes();
-        restablecerListaTiquetes(cliente);
+    public void verTiquetes(Cliente cliente){
         clienteTiquete= cliente;
-        return "verTiquetes";
+        restablecerListaTiquetes(cliente);
+        super.redireccionarVista("verTiquetes.xhtml");
     }
     public String canelarVentaTiquete(Tiquete tiqueteCancelar){
         mundo.cancelarVentaDeTiqueteACliente(tiqueteCancelar);
@@ -101,6 +98,10 @@ public class GestionarTiquete extends Controller{
         return "verTiquetes.xhtml";
     }
 
+    public String mostrarNombre(){
+        return "TIQUETES DE "+clienteTiquete.getNombres();
+    }
+    
     public Tiquete getTiqueteAgregar() {
         return tiqueteAgregar;
     }
@@ -155,6 +156,14 @@ public class GestionarTiquete extends Controller{
 
     public void setTiquetes(ArrayList<Tiquete> tiquetes) {
         this.tiquetes = tiquetes;
+    }
+
+    public Cliente getClienteTiquete() {
+        return clienteTiquete;
+    }
+
+    public void setClienteTiquete(Cliente clienteTiquete) {
+        this.clienteTiquete = clienteTiquete;
     }
     
 }

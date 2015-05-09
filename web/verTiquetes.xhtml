@@ -11,7 +11,7 @@
         <h:form>
             <div id="nom_pag9">
                 <a id="pro">
-                    <strong>Mostrar Tiquete</strong>
+                    <strong><h:outputLabel value="#{cliente.nombres}"/></strong>
                 </a>
             </div>
             <h:dataTable value="#{gestionarTiquete.tiquetes}" var="tiquete">
@@ -34,6 +34,9 @@
                     <h:outputLabel value="#{tiquete.horaVenta}"/>
                 </h:column>
                 <h:column>
+                    <f:facet name="header">
+                        <h:outputLabel value="Cancelar Tiquete"/>
+                    </f:facet>
                     <h:commandButton value="Cancelar" actionListener="#{gestionarTiquete.canelarVentaTiquete(tiquete)}"/>
                 </h:column>
             </h:dataTable>

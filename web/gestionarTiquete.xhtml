@@ -52,7 +52,7 @@
                     <f:facet name="header">
                         <h:outputLabel value="Ver Tiquetes"/>
                     </f:facet>
-                    <h:commandButton value="Ver Tiquetes" action="#{gestionarTiquete.verTiquetes(cliente)}"/>
+                    <h:commandButton value="Ver Tiquetes" actionListener="#{gestionarTiquete.verTiquetes(cliente)}"/>
                 </h:column>
             </h:dataTable>
             <h:commandButton value="Panel Control" action="index.xhtml"/>
