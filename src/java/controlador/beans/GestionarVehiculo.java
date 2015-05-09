@@ -260,5 +260,4 @@ public class GestionarVehiculo extends Controller{
     public void setImagenArchivoModificar(UploadedFile imagenArchivoModificar) {
         this.imagenArchivoModificar = imagenArchivoModificar;
     }
-    
 }
