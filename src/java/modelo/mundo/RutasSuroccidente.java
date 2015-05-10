@@ -773,7 +773,7 @@ public class RutasSuroccidente {
             
             Tiquete[] tiquetesVehiculo=v.getTiquetes();
             for(int i=0;i<tiquetesVehiculo.length;i++){
-                if(tiquetesVehiculo[i]==null){
+                if(tiquetesVehiculo[i]!=null){
                     if(tiquetesVehiculo[i].getNumero()== tiqueteCancelar.getNumero()){
                         tiquetesVehiculo[i]=null;
                         c.getTiquetes().remove(tiqueteCancelar);

@@ -36,10 +36,10 @@ public class GestionarTiquete extends Controller{
     private String horaVenta;
     private int identificacion;
     private String placa;
-    private Cliente clienteTiquete;
-    private ArrayList<Vehiculo> vehiculosConRuta;
-    private ArrayList<Cliente> clientes;
-    private ArrayList<Tiquete> tiquetes;
+    private static Cliente clienteTiquete;
+    private static ArrayList<Vehiculo> vehiculosConRuta;
+    private static ArrayList<Cliente> clientes;
+    private static ArrayList<Tiquete> tiquetes;
     /**
      * Creates a new instance of GestionarTiquetes
      */

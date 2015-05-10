@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.ApplicationScoped;
@@ -24,7 +23,6 @@ import javax.servlet.ServletContext;
 import modelo.mundo.Linea;
 import modelo.mundo.Marca;
 import modelo.mundo.Vehiculo;
-import org.apache.tomcat.util.http.fileupload.UploadContext;
 import org.primefaces.model.UploadedFile;
 
 /**
