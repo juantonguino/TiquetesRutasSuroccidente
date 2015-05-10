@@ -17,7 +17,7 @@ import modelo.mundo.RutaTurno;
 @ManagedBean
 @RequestScoped
 public class ReporteTotalValor extends Controller{
-    private ArrayList<RutaTurno> rutasTurnos;
+    private static ArrayList<RutaTurno> rutasTurnos;
     /**
      * Creates a new instance of ReporteTotalValor
      */

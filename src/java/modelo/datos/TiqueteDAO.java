@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import modelo.mundo.*;
 
@@ -20,7 +21,8 @@ public class TiqueteDAO {
      * @param nVehiculo
      * @return Debe ser un objeto de tipo Tiquete
      */
-    public Tiquete seleccionar(Vehiculo nVehiculo){
+    public ArrayList<Tiquete> seleccionar(Vehiculo nVehiculo){
+        ArrayList<Tiquete> retorno= new ArrayList<>();
         PreparedStatement ps;
         FachadaDB bd = new FachadaDB();
         Connection con = bd.crearConexion();
@@ -33,6 +35,7 @@ public class TiqueteDAO {
             res = st.executeQuery(query);
             while(res.next()){
                 t = new Tiquete(res.getTime("hora_venta"), res.getDouble("valor_tiquete"), res.getInt("numero"));
+                retorno.add(t);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -51,7 +54,7 @@ public class TiqueteDAO {
                 exe.printStackTrace();
             }
         }  
-        return t;
+        return retorno;
     }
     
     
@@ -166,5 +169,13 @@ public class TiqueteDAO {
                 }
             }
         }
+    }
+    /**
+     * Metodo encargado de instanciar un objeto de la clase Tiquete
+     * @param nClente
+     * @return Debe ser un objeto de tipo Tiquete
+     */
+    public ArrayList<Tiquete> seleccionar(Cliente nCliente){
+        return null;
     }
 }

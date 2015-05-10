@@ -99,7 +99,7 @@ public class GestionarTiquete extends Controller{
     }
 
     public String mostrarNombre(){
-        return "TIQUETES DE "+clienteTiquete.getNombres();
+        return "TIQUETES DE "+clienteTiquete.getNombres()+" "+clienteTiquete.getApellidos();
     }
     
     public Tiquete getTiqueteAgregar() {

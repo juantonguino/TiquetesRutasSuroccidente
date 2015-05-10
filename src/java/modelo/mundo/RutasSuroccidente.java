@@ -176,6 +176,11 @@ public class RutasSuroccidente {
          */
         public void cargar(){
             clientes= clienteDAO.seleccionar();
+            for(int i=0;i<clientes.size();i++){
+                Cliente cliente=clientes.get(i);
+                ArrayList<Tiquete> tiquetes = cliente.getTiqueteDAO().seleccionar(cliente);
+                cliente.setTiquetes(tiquetes);
+            }
             marcas=marcaDAO.seleccionar();
             for(int i=0; i<marcas.size();i++){
                 Marca miMarca = marcas.get(i);
@@ -191,6 +196,10 @@ public class RutasSuroccidente {
                         Vehiculo miVehiculo = misVehiculos.get(k);
                         Propietario miPropietario = miVehiculo.getPropietarioDAO().seleccionar(miVehiculo);
                         miVehiculo.setPropietario(miPropietario);
+                        RutaTurno rutaTurno = miVehiculo.getRutaTurnoDAO().seleccionar(miMarca, miLinea, miVehiculo);
+                        miVehiculo.setRutaTurno(rutaTurno);
+                        ArrayList<Tiquete> tiquetesVehiculo = miVehiculo.getTiqueteDAO().seleccionar(miVehiculo);
+                        miVehiculo.setTiquetes((Tiquete[]) tiquetesVehiculo.toArray());
                     }
                 }
             }
@@ -811,7 +820,7 @@ public class RutasSuroccidente {
          * @return el numero de tiqutes vendidos por una ruta y un turno pasadas como parametro
          */
         public double reportarValorTotalVentaTiquetesParaRutaTurno(RutaTurno rutaReportar){
-            int contador = 0;
+            double contador = 0;
             for(int i=0;i<marcas.size();i++){
                 ArrayList<Linea> misLineas = marcas.get(i).getLineas();
                 for(int j=0;j< misLineas.size();j++){
@@ -823,7 +832,7 @@ public class RutasSuroccidente {
                                 Tiquete[] misTiquetes = misVehiculos.get(k).getTiquetes();
                                 for(int m=0;m<misTiquetes.length;m++){
                                     if(misTiquetes[m]!=null){
-                                        contador++;
+                                        contador+=misTiquetes[m].getValorTiquete();
                                     }
                                 }
                             }
@@ -839,30 +848,33 @@ public class RutasSuroccidente {
                 ArrayList<Linea> misLineas = marcas.get(i).getLineas();
                 for(int j=0;j<misLineas.size();j++){
                     ArrayList<Vehiculo> misVehiculos = misLineas.get(j).getVehiculos();
-                    Vehiculo miVehiculo = misVehiculos.get(j);
-                    RutaTurno miRuta = miVehiculo.getRutaTurno();
-                    if(miRuta!=null){
-                        listaRepetida.add(miRuta);
+                    for(int k=0;k<misVehiculos.size();k++){
+                        Vehiculo miveVehiculo= misVehiculos.get(k);
+                        RutaTurno miRuta = miveVehiculo.getRutaTurno();
+                        if(miRuta!=null){
+                            listaRepetida.add(miRuta);
+                        }
                     }
                 }
             }
-            ArrayList<RutaTurno> listaRetornar= new ArrayList<RutaTurno>();
-            for(int i=0;i<listaRepetida.size();i++){
-                RutaTurno ruta = listaRepetida.get(i);
-                RutaTurno buscada= buscarRutaTurno(listaRepetida, ruta);
-                if(buscada==null){
-                    listaRetornar.add(ruta);
-                }
-            }
-            return listaRetornar;
-        }
-        public RutaTurno buscarRutaTurno(ArrayList<RutaTurno> listaRutas, RutaTurno buscar){
-            for(int i=0; i<listaRutas.size(); i++){
-                RutaTurno ruta = listaRutas.get(i);
-                if(ruta.getCiudadDestino().equalsIgnoreCase(buscar.getCiudadDestino())&& ruta.getCiudadOrigen().equalsIgnoreCase(buscar.getCiudadOrigen())&&ruta.getHoraSalida().equals(buscar.getHoraSalida())){
-                    return ruta;
-                }
-            }
-            return null;
+            int tamaloListaRepetida= listaRepetida.size();
+            //ojo
+            //for(int i=0;i<tamaloListaRepetida;i++){
+               for(int j=0;j<listaRepetida.size();j++){
+                   RutaTurno primera = listaRepetida.get(j);
+                   int siquiene = j+1;
+                   for(int k=siquiene;k<listaRepetida.size();k++){
+                       RutaTurno actual = listaRepetida.get(k);
+                       if(actual!=null){
+                            if(primera.getCiudadDestino().equalsIgnoreCase(actual.getCiudadDestino())&&
+                               primera.getCiudadOrigen().equalsIgnoreCase(actual.getCiudadOrigen())&& 
+                               primera.getHoraSalida().equals(actual.getHoraSalida())){
+                                listaRepetida.remove(actual);
+                            }
+                       }
+                   }
+              }
+            //}
+            return listaRepetida;
         }
 }
