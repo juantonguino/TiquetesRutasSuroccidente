@@ -7,14 +7,15 @@
         <title>REPORTER NUMERO TIQUETES VENDIDOS</title>
         <link rel="stylesheet" type="text/css" href="../css/style.css" />
     </h:head>
-    <h:body>
+    <h:body id="num_tiquetes">
         <h:form>
             <div id="nom_pag9">
-                <a id="pro">
+                <a id="nTiquetesVendidos">
                     <strong>REPORTER NUMERO TIQUETES VENDIDOS</strong>
                 </a>
             </div>
-            <h:dataTable value="#{reporteNumeroTiequetesVendidos.listaVehiculosConRuta}" var="vehiculo">
+            <div id="panel_numTiquetes">
+                <h:dataTable value="#{reporteNumeroTiequetesVendidos.listaVehiculosConRuta}" var="vehiculo">
                 <h:column>
                     <f:facet name="header">
                         <h:outputLabel value="Placa"/>
@@ -47,6 +48,8 @@
                 </h:column>
             </h:dataTable>
             <h:commandButton value="Panel Control" action="index.xhtml"/>
+            </div>
+            
         </h:form>
     </h:body>
 </html>
