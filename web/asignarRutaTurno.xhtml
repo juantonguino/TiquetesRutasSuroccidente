@@ -7,24 +7,25 @@
         <title>ASIGNAR RUTA Y TURNO</title>
         <link rel="stylesheet" type="text/css" href="../css/style.css" />
     </h:head>
-    <h:body>
+    <h:body id="ges_Ruta">
         <h:form>
             <div id="nom_pag9">
-                <a id="pro">
+                <a id="ruta_turno">
                     <strong>GESTIONAR RURA Y TURNO</strong>
                 </a>
             </div>
-            <h:panelGrid columns="2">
+            <div id="panel_gesRuta">
+                <h:panelGrid columns="2">
                 <h:outputLabel value="Placa Vehiculo"/>
                 <h:selectOneMenu style="margin-left: 20px" value="#{asignarRutaTurno.placa}">
                     <f:selectItems value="#{asignarRutaTurno.listaVehiculosSinRuta}" var="vehiculo" itemValue="#{vehiculo.placa}" itemLabel="#{vehiculo.placa}"/>
                 </h:selectOneMenu>
                 <h:outputLabel value="Ciudad Origen"/>
-                <h:inputText value="#{asignarRutaTurno.rutaTurnoAgregar.ciudadOrigen}"/>
+                <h:inputText style="margin-left: 20px;" value="#{asignarRutaTurno.rutaTurnoAgregar.ciudadOrigen}"/>
                 <h:outputLabel value="Ciudad Destino"/>
-                <h:inputText value="#{asignarRutaTurno.rutaTurnoAgregar.ciudadDestino}"/>
+                <h:inputText style="margin-left: 20px;" value="#{asignarRutaTurno.rutaTurnoAgregar.ciudadDestino}"/>
                 <h:outputLabel value="Hora Salida"/>
-                <h:inputText value="#{asignarRutaTurno.hora}"/>
+                <h:inputText style="margin-left: 20px;" value="#{asignarRutaTurno.hora}"/>
                 <h:commandButton value="Asignar Ruta" actionListener="#{asignarRutaTurno.asignarRutaTurno()}"/>
             </h:panelGrid>
             <h:dataTable value="#{asignarRutaTurno.listaVehiculosConRuta}" var="vehiculo">
@@ -54,6 +55,8 @@
                 </h:column>
             </h:dataTable>
             <h:commandButton value="Panel Control" action="index.xhtml"/>
+            </div>
+            
         </h:form>
     </h:body>
 </html>

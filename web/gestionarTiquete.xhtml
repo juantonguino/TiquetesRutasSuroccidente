@@ -7,14 +7,15 @@
         <title>GESTIONAR TIQUETE</title>
         <link rel="stylesheet" type="text/css" href="../css/style.css" />
     </h:head>
-    <h:body>
+    <h:body id="ges_tiquetes">
         <h:form>
             <div id="nom_pag9">
                 <a id="pro">
                     <strong>GESTIONAR TIQUETES</strong>
                 </a>
             </div>
-            <h:panelGrid columns="2">
+            <div id="panel_gesTiquetes">
+                <h:panelGrid columns="2">
                 <h:outputLabel value="Placa Vehiculo"/>
                 <h:selectOneMenu style="margin-left: 20px" value="#{gestionarTiquete.placa}">
                     <f:selectItems value="#{gestionarTiquete.vehiculosConRuta}" var="vehiculo" itemValue="#{vehiculo.placa}" itemLabel="#{vehiculo.placa}"/>
@@ -24,9 +25,9 @@
                     <f:selectItems value="#{gestionarTiquete.clientes}" var="cliente" itemValue="#{cliente.identificacion}" itemLabel="#{cliente.nombres}"/>
                 </h:selectOneMenu>
                 <h:outputLabel value="Hora Venta"/>
-                <h:inputText value="#{gestionarTiquete.horaVenta}"/>
+                <h:inputText style="margin-left: 20px;" value="#{gestionarTiquete.horaVenta}"/>
                 <h:outputLabel value="Valor Tiquete"/>
-                <h:inputText value="#{gestionarTiquete.tiqueteAgregar.valorTiquete}"/>
+                <h:inputText style="margin-left: 20px;" value="#{gestionarTiquete.tiqueteAgregar.valorTiquete}"/>
                 <h:commandButton value="Vender Tiquete" actionListener="#{gestionarTiquete.venderTiquete()}"/>
             </h:panelGrid>
             <h:dataTable value="#{gestionarTiquete.clientes}" var="cliente">
@@ -56,6 +57,8 @@
                 </h:column>
             </h:dataTable>
             <h:commandButton value="Panel Control" action="index.xhtml"/>
+            </div>
+            
         </h:form>
     </h:body>
 </html>

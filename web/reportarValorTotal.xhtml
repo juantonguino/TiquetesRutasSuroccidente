@@ -7,14 +7,15 @@
         <title>REPORTE VALOR TOTAL TIQUETES</title>
         <link rel="stylesheet" type="text/css" href="../css/style.css" />
     </h:head>
-    <h:body>
+    <h:body id="repo_valor">
         <h:form>
             <div id="nom_pag9">
-                <a id="pro">
+                <a id="repo">
                     <strong>REPORTE VALOR TOTAL TIQUETES</strong>
                 </a>
             </div>
-            <h:dataTable value="#{reporteTotalValor.rutasTurnos}" var="ruta">
+            <div id="panel_reportar_valor">
+                <h:dataTable value="#{reporteTotalValor.rutasTurnos}" var="ruta">
                 <h:column>
                     <f:facet name="header">
                         <h:outputLabel value="Ciudad Origen"/>
@@ -40,7 +41,10 @@
                     <h:outputLabel value="#{reporteTotalValor.darReporteValorRutaTurno(ruta)}"/>
                 </h:column>
             </h:dataTable>
+                
             <h:commandButton value="Panel Control" action="index.xhtml"/>
+            </div>
+            
         </h:form>
     </h:body>
 </html>
