@@ -171,5 +171,39 @@ public class TiqueteDAO {
             }
         }
     }
-
+    public ArrayList<Tiquete> seleccionar(Cliente nCliente){
+        ArrayList<Tiquete> retorno= new ArrayList<>();
+        PreparedStatement ps;
+        FachadaDB bd = new FachadaDB();
+        Connection con = bd.crearConexion();
+        Statement st = null;
+        ResultSet res = null;
+        Tiquete t = null;
+        try {
+            String query = "SELECT * FROM tiquete WHERE cliente = '" + nCliente.getIdentificacion() + "'";
+            st = con.createStatement();
+            res = st.executeQuery(query);
+            while(res.next()){
+                t = new Tiquete(res.getTime("hora_venta"), res.getDouble("valor_tiquete"), res.getInt("numero"));
+                retorno.add(t);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (con != null) {
+                    con.close();
+                }
+                if (st != null) {
+                    st.close();
+                }
+                if (res != null) {
+                    res.close();
+                }
+            } catch (Exception exe) {
+                exe.printStackTrace();
+            }
+        }  
+        return retorno;
+    }
 }
