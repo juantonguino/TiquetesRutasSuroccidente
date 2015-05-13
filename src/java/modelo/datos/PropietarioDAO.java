@@ -29,7 +29,7 @@ public class PropietarioDAO {
         Statement st = null;
         ResultSet res = null;
         try {
-            String query = "SELECT * FROM propietario WHERE vehiculo = " + nVehiculo.getPlaca();
+            String query = "SELECT * FROM propietario WHERE vehiculo = '" + nVehiculo.getPlaca() + "'";
             st = con.createStatement();
             res = st.executeQuery(query);
             while(res.next()){
@@ -64,7 +64,7 @@ public class PropietarioDAO {
     public void agregar(Vehiculo nVehiculo, Propietario nPropietario) {
         Connection con = null;
         Statement st = null;
-        String query = "INSERT INTO propietario (identificación, nombres, apellidos, direccion, telefono, vehiculo)"
+        String query = "INSERT INTO propietario (identificacion, nombres, apellidos, direccion, telefono, vehiculo)"
                 + " VALUES (" + nPropietario.getIdentificacion() + ","
                 + " '" + nPropietario.getNombres() + "',"
                 + " '" + nPropietario.getApellidos() + "',"
@@ -111,7 +111,7 @@ public class PropietarioDAO {
                 + ", apellidos = '" + nPropietario.getApellidos() + "'"
                 + ", direccion = '" + nPropietario.getDireccion() + "'"
                 + ", telefono = " + nPropietario.getTelefono() 
-                + " WHERE identificación = " + nPropietario.getIdentificacion();
+                + " WHERE identificacion = " + nPropietario.getIdentificacion();
         try {
             FachadaDB bd = new FachadaDB();
             con = bd.crearConexion();

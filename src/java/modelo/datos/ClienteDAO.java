@@ -144,7 +144,7 @@ public class ClienteDAO {
     public void eliminar(Cliente nCliente) {
         Connection con = null;
         Statement st = null;
-        String query = "DELETE FROM cliente  WHERE identificación = " + nCliente.getIdentificacion();
+        String query = "DELETE FROM cliente  WHERE identificacion = " + nCliente.getIdentificacion();
         try {
             FachadaDB bd = new FachadaDB();
             con = bd.crearConexion();

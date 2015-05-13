@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import modelo.mundo.*;
 
 
@@ -30,7 +29,7 @@ public class TiqueteDAO {
         ResultSet res = null;
         Tiquete t = null;
         try {
-            String query = "SELECT * FROM tiquete WHERE vehiculo = " + nVehiculo.getPlaca();
+            String query = "SELECT * FROM tiquete WHERE vehiculo = '" + nVehiculo.getPlaca() + "'";
             st = con.createStatement();
             res = st.executeQuery(query);
             while(res.next()){
@@ -67,10 +66,11 @@ public class TiqueteDAO {
     public void agregar(Vehiculo nVehiculo, Tiquete nTiquete, Cliente nCliente){
         Connection con = null;
         Statement st = null;
+        String hora = new SimpleDateFormat(RutasSuroccidente.FORMATO_HORAS).format(nTiquete.getHoraVenta());
         String query = "INSERT INTO tiquete (numero, hora_venta, valor_tiquete, vehiculo, cliente)"
                 + " VALUES (" + nTiquete.getNumero() + ", "
-                + new SimpleDateFormat(RutasSuroccidente.FORMATO_HORAS).format(nTiquete.getHoraVenta()) + ", "
-                + nTiquete.getValorTiquete()
+                + "'" + hora + "', "
+                + nTiquete.getValorTiquete() + ", "
                 + "'" + nVehiculo.getPlaca() + "', "
                 + nCliente.getIdentificacion() + ")";
         try {
@@ -107,8 +107,9 @@ public class TiqueteDAO {
     public void actualizar(Tiquete nTiquete){
         Connection con = null;
         Statement st = null;
-        String query = "UPDATE tiquete SET hora_venta = " + nTiquete.getHoraVenta().getTime()
-                + ", valor_tiquete = " + nTiquete.getValorTiquete()
+        String hora = new SimpleDateFormat(RutasSuroccidente.FORMATO_HORAS).format(nTiquete.getHoraVenta());
+        String query = "UPDATE tiquete SET hora_venta = '" + hora + "', "
+                + "valor_tiquete = " + nTiquete.getValorTiquete()
                 + " WHERE numero = " + nTiquete.getNumero();
         try {
             FachadaDB bd = new FachadaDB();
@@ -170,12 +171,5 @@ public class TiqueteDAO {
             }
         }
     }
-    /**
-     * Metodo encargado de instanciar un objeto de la clase Tiquete
-     * @param nClente
-     * @return Debe ser un objeto de tipo Tiquete
-     */
-    public ArrayList<Tiquete> seleccionar(Cliente nCliente){
-        return null;
-    }
+
 }

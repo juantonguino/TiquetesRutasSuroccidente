@@ -5,7 +5,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-
 import modelo.mundo.Linea;
 import modelo.mundo.Marca;
 
@@ -28,7 +27,7 @@ public class LineaDAO {
         ResultSet res = null;
         ArrayList<Linea> lineas = new ArrayList<>();
         try {
-            String query = "SELECT * FROM linea";
+            String query = "SELECT * FROM linea WHERE nombre_marca = '" + nMarca.getNombre() + "'";
             st = con.createStatement();
             res = st.executeQuery(query);
             while(res.next()){
@@ -63,7 +62,8 @@ public class LineaDAO {
     public void agregar(Marca nMarca, Linea nLinea){
         Connection con = null;
         Statement st = null;
-        String query = "INSERT INTO linea (nombre) VALUES ('" + nLinea.getNombre() + "')";
+        String query = "INSERT INTO linea (nombre, nombre_marca)"
+                + " VALUES ('" + nLinea.getNombre() + "', '" + nMarca.getNombre() + "')";
         try {
             FachadaDB bd = new FachadaDB();
             con = bd.crearConexion();

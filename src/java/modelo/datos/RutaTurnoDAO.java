@@ -71,10 +71,11 @@ public class RutaTurnoDAO {
     public void agregar(Marca nMarca, Linea nLinea, Vehiculo nVehiculo, RutaTurno nRutaurno){
         Connection con = null;
         Statement st = null;
+        String hora = new SimpleDateFormat(RutasSuroccidente.FORMATO_HORAS).format(nRutaurno.getHoraSalida());
         String query = "INSERT INTO rutaturno (ciudad_destino, ciudad_origen, hora_salida, vehiculo)"
                 + " VALUES ('" + nRutaurno.getCiudadDestino() + "', "
                 + "'" + nRutaurno.getCiudadOrigen() + "', "
-                + new SimpleDateFormat(RutasSuroccidente.FORMATO_HORAS).format(nRutaurno.getHoraSalida()) + ", "
+                + "'" + hora + "', "
                 + "'" + nVehiculo.getPlaca() + "')";
         try {
             FachadaDB bd = new FachadaDB();
@@ -113,10 +114,12 @@ public class RutaTurnoDAO {
     public void actualizar(Marca nMarca, Linea nLinea, Vehiculo nVehiculo, RutaTurno nRutaurno){
         Connection con = null;
         Statement st = null;
-        String query = "UPDATE rutaturno SET ciudad_destino = '" + nRutaurno.getCiudadDestino() + "'"
-                + ", ciudad_origen = " + nRutaurno.getCiudadOrigen() + "'"
-                + ", hora_salida = " + new SimpleDateFormat(RutasSuroccidente.FORMATO_HORAS).format(nRutaurno.getHoraSalida())
-                + " WHERE id_rutaturno = " + nRutaurno.hashCode(); // falta el id
+        String hora = new SimpleDateFormat(RutasSuroccidente.FORMATO_HORAS).format(nRutaurno.getHoraSalida());
+        String query = "UPDATE rutaturno "
+                + "SET ciudad_destino = '" + nRutaurno.getCiudadDestino() + "', "
+                + "ciudad_origen = '" + nRutaurno.getCiudadOrigen() + "', "
+                + "hora_salida = '" + hora + "' "
+                + "WHERE vehiculo = '" + nVehiculo.getPlaca() + "'";
         try {
             FachadaDB bd = new FachadaDB();
             con = bd.crearConexion();
@@ -154,7 +157,7 @@ public class RutaTurnoDAO {
     public void eliminar(Marca nMarca, Linea nLinea, Vehiculo nVehiculo, RutaTurno nRutaurno){
         Connection con = null;
         Statement st = null;
-        String query = "DELETE FROM rutaturno  WHERE vehiculo = " + nVehiculo.getPlaca();
+        String query = "DELETE FROM rutaturno  WHERE vehiculo = '" + nVehiculo.getPlaca() + "'";
         try {
             FachadaDB bd = new FachadaDB();
             con = bd.crearConexion();

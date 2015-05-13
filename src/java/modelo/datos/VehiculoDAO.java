@@ -30,7 +30,7 @@ public class VehiculoDAO {
         ResultSet res = null;
         ArrayList<Vehiculo> vehiculos = new ArrayList();
         try {
-            String query = "SELECT * FROM vehiculo";
+            String query = "SELECT * FROM vehiculo WHERE linea = '" + nLinea.getNombre() + "'";
             st = con.createStatement();
             res = st.executeQuery(query);
             while(res.next()){ 
@@ -65,11 +65,12 @@ public class VehiculoDAO {
     public void agregar(Marca nMarca, Linea nLinea, Vehiculo nVehiculo, Propietario nPropietario) {
         Connection con = null;
         Statement st = null;
-        String query = "INSERT INTO vehiculo (placa, modelo, numero_pasajeros, fotografia)"
+        String query = "INSERT INTO vehiculo (placa, modelo, numero_pasajeros, fotografia, linea)"
                 + " VALUES ('" + nVehiculo.getPlaca() + "',"
-                + " '" + nVehiculo.getModelo() + "',"
-                + " '" + nVehiculo.getNumeroPasajeros() + "',"
-                + " '" + nVehiculo.getFotografia() + "')";
+                + nVehiculo.getModelo() + ", "
+                + nVehiculo.getNumeroPasajeros() + ", "
+                + "'" + nVehiculo.getFotografia() + "', "
+                + "'" + nLinea.getNombre() + "')";
         try {
             FachadaDB bd = new FachadaDB();
             con = bd.crearConexion();
@@ -106,8 +107,8 @@ public class VehiculoDAO {
     public void actualizar(Marca nMarca, Linea nLinea, Vehiculo nVehiculo)  {
         Connection con = null;
         Statement st = null;
-        String query = "UPDATE vehiculo SET modelo = '" + nVehiculo.getModelo() + "'"
-                + ", numero_pasajeros = '" + nVehiculo.getNumeroPasajeros() + "'"
+        String query = "UPDATE vehiculo SET modelo = " + nVehiculo.getModelo() 
+                + ", numero_pasajeros = " + nVehiculo.getNumeroPasajeros()
                 + ", fotografia = '" + nVehiculo.getFotografia() + "'"
                 + " WHERE placa = '" + nVehiculo.getPlaca() + "'";
         try {
