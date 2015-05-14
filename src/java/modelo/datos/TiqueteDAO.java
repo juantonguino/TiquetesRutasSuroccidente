@@ -76,8 +76,8 @@ public class TiqueteDAO {
         try {
             FachadaDB bd = new FachadaDB();
             con = bd.crearConexion();
-            st = con.prepareStatement(query);
-            st.executeQuery(query);
+            st = con.createStatement();
+            st.execute(query);
             System.out.println("Se ha agregado un nuevo tiquete de número: " + nTiquete.getNumero());
         } catch (SQLException e) {
             e.printStackTrace();
@@ -114,8 +114,8 @@ public class TiqueteDAO {
         try {
             FachadaDB bd = new FachadaDB();
             con = bd.crearConexion();
-            st = con.prepareStatement(query);
-            st.executeQuery(query);
+            st = con.createStatement();
+            st.execute(query);
              System.out.println("Se ha modificado el tiquetede número: " + nTiquete.getNumero());
         } catch (SQLException e) {
             e.printStackTrace();
@@ -149,8 +149,8 @@ public class TiqueteDAO {
         try {
             FachadaDB bd = new FachadaDB();
             con = bd.crearConexion();
-            st = con.prepareStatement(query);
-            st.executeQuery(query);
+            st = con.createStatement();
+            st.execute(query);
              System.out.println("Se ha eliminado el tiquete de número: " + nTiquete.getNumero());
         } catch (SQLException e) {
             e.printStackTrace();

@@ -74,8 +74,8 @@ public class PropietarioDAO {
         try {
             FachadaDB bd = new FachadaDB();
             con = bd.crearConexion();
-            st = con.prepareStatement(query);
-            st.executeQuery(query);
+            st = con.createStatement();
+            st.execute(query);
             System.out.println("Se ha agregado un propietario identificado con el numero: " + nPropietario.getIdentificacion() 
                     + " al vehículo con la placa: " + nVehiculo.getPlaca());
         } catch (SQLException e) {
@@ -115,8 +115,8 @@ public class PropietarioDAO {
         try {
             FachadaDB bd = new FachadaDB();
             con = bd.crearConexion();
-            st = con.prepareStatement(query);
-            st.executeQuery(query);
+            st = con.createStatement();
+            st.execute(query);
              System.out.println("Se ha modificado el propietario con la identificación: " + nPropietario.getIdentificacion());
         } catch (SQLException e) {
             e.printStackTrace();
@@ -151,8 +151,8 @@ public class PropietarioDAO {
         try {
             FachadaDB bd = new FachadaDB();
             con = bd.crearConexion();
-            st = con.prepareStatement(query);
-            st.executeQuery(query);
+            st = con.createStatement();
+            st.execute(query);
              System.out.println("Se ha eliminado el propietario con la identificación: " + nPropietario.getIdentificacion());
         } catch (SQLException e) {
             e.printStackTrace();

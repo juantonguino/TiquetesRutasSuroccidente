@@ -74,8 +74,8 @@ public class VehiculoDAO {
         try {
             FachadaDB bd = new FachadaDB();
             con = bd.crearConexion();
-            st = con.prepareStatement(query);
-            st.executeQuery(query);
+            st = con.createStatement();
+            st.execute(query);
             System.out.println("Se ha agregado un vehiculo con la placa: " + nVehiculo.getPlaca());
         } catch (SQLException e) {
             e.printStackTrace();
@@ -114,8 +114,8 @@ public class VehiculoDAO {
         try {
             FachadaDB bd = new FachadaDB();
             con = bd.crearConexion();
-            st = con.prepareStatement(query);
-            st.executeQuery(query);
+            st = con.createStatement();
+            st.execute(query);
              System.out.println("Se ha modificado el vehículo con la placa: " + nVehiculo.getPlaca());
         } catch (SQLException e) {
             e.printStackTrace();
@@ -151,8 +151,8 @@ public class VehiculoDAO {
         try {
             FachadaDB bd = new FachadaDB();
             con = bd.crearConexion();
-            st = con.prepareStatement(query);
-            st.executeQuery(query);
+            st = con.createStatement();
+            st.execute(query);
              System.out.println("Se ha eliminado el vehiculo con la placa: " + nVehiculo.getPlaca() );
         } catch (SQLException e) {
             e.printStackTrace();

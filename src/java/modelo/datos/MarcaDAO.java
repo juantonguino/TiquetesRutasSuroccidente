@@ -69,8 +69,8 @@ public class MarcaDAO {
         try {
             FachadaDB bd = new FachadaDB();
             con = bd.crearConexion();
-            st = con.prepareStatement(query);
-            st.executeQuery(query);
+            st = con.createStatement();
+            st.execute(query);
             System.out.println("Se ha registrado una nueva marca, nombre: " + nMarca.getNombre());
         } catch (SQLException e) {
             e.printStackTrace();
@@ -107,8 +107,8 @@ public class MarcaDAO {
         try {
             FachadaDB bd = new FachadaDB();
             con = bd.crearConexion();
-            st = con.prepareStatement(query);
-            st.executeQuery(query);
+            st = con.createStatement();
+            st.execute(query);
              System.out.println("Se ha modificado el nombre de la marca: " + vNombre
              + " por: " + nMarca.getNombre());
         } catch (SQLException e) {
@@ -145,8 +145,8 @@ public class MarcaDAO {
         try {
             FachadaDB bd = new FachadaDB();
             con = bd.crearConexion();
-            st = con.prepareStatement(query);
-            st.executeQuery(query);
+            st = con.createStatement();
+            st.execute(query);
              System.out.println("Se ha eliminado la marca con el nombre: " + nMarca.getNombre() );
         } catch (SQLException e) {
             e.printStackTrace();

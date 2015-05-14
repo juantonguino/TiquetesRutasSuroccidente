@@ -80,8 +80,8 @@ public class RutaTurnoDAO {
         try {
             FachadaDB bd = new FachadaDB();
             con = bd.crearConexion();
-            st = con.prepareStatement(query);
-            st.executeQuery(query);
+            st = con.createStatement();
+            st.execute(query);
             System.out.println("Se ha agregado una ruta y turno al vehiculo con la placa: " + nVehiculo.getPlaca());
         } catch (SQLException e) {
             e.printStackTrace();
@@ -123,8 +123,8 @@ public class RutaTurnoDAO {
         try {
             FachadaDB bd = new FachadaDB();
             con = bd.crearConexion();
-            st = con.prepareStatement(query);
-            st.executeQuery(query);
+            st = con.createStatement();
+            st.execute(query);
              System.out.println("Se ha modificado la ruta turno");
         } catch (SQLException e) {
             e.printStackTrace();
@@ -161,8 +161,8 @@ public class RutaTurnoDAO {
         try {
             FachadaDB bd = new FachadaDB();
             con = bd.crearConexion();
-            st = con.prepareStatement(query);
-            st.executeQuery(query);
+            st = con.createStatement();
+            st.execute(query);
              System.out.println("Se ha eliminado la ruta y turno del vehiculo con la placa: " + nVehiculo.getPlaca());
         } catch (SQLException e) {
             e.printStackTrace();

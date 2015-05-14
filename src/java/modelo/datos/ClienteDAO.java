@@ -71,8 +71,8 @@ public class ClienteDAO {
         try {
             FachadaDB bd = new FachadaDB();
             con = bd.crearConexion();
-            st = con.prepareStatement(query);
-            st.executeQuery(query);
+            st = con.createStatement();
+            st.execute(query);
             System.out.println("Se ha agregado un cliente nuevo con la identificación: " + nCliente.getIdentificacion());
         } catch (SQLException e) {
             e.printStackTrace();
@@ -111,8 +111,8 @@ public class ClienteDAO {
         try {
             FachadaDB bd = new FachadaDB();
             con = bd.crearConexion();
-            st = con.prepareStatement(query);
-            st.executeQuery(query);
+            st = con.createStatement();
+            st.execute(query);
              System.out.println("Se ha modificado el cliente con la identificación: " + nCliente.getIdentificacion());
         } catch (SQLException e) {
             e.printStackTrace();
@@ -148,8 +148,8 @@ public class ClienteDAO {
         try {
             FachadaDB bd = new FachadaDB();
             con = bd.crearConexion();
-            st = con.prepareStatement(query);
-            st.executeQuery(query);
+            st = con.createStatement();
+            st.execute(query);
              System.out.println("Se ha eliminado el cliente con la identificación: " + nCliente.getIdentificacion() );
         } catch (SQLException e) {
             e.printStackTrace();

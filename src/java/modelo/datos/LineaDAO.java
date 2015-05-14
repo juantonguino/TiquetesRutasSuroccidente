@@ -67,8 +67,8 @@ public class LineaDAO {
         try {
             FachadaDB bd = new FachadaDB();
             con = bd.crearConexion();
-            st = con.prepareStatement(query);
-            st.executeQuery(query);
+            st = con.createStatement();
+            st.execute(query);
             System.out.println("Se ha registrado una nueva linea en la marca: "
                     + nMarca.getNombre() + ", con el nombre: " + nLinea.getNombre());
         } catch (SQLException e) {
@@ -106,8 +106,8 @@ public class LineaDAO {
         try {
             FachadaDB bd = new FachadaDB();
             con = bd.crearConexion();
-            st = con.prepareStatement(query);
-            st.executeQuery(query);
+            st = con.createStatement();
+            st.execute(query);
              System.out.println("Se ha modificado la línea de nombre: " + vNombre
              + " por: " + nLinea.getNombre());
         } catch (SQLException e) {
@@ -143,8 +143,8 @@ public class LineaDAO {
         try {
             FachadaDB bd = new FachadaDB();
             con = bd.crearConexion();
-            st = con.prepareStatement(query);
-            st.executeQuery(query);
+            st = con.createStatement();
+            st.execute(query);
              System.out.println("Se ha eliminado la marca con el nombre: " + nLinea.getNombre() );
         } catch (SQLException e) {
             e.printStackTrace();
