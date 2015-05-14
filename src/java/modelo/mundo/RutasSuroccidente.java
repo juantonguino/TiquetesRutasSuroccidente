@@ -1,7 +1,5 @@
 package modelo.mundo;
 
-import java.awt.image.BufferedImage;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -83,7 +81,7 @@ public class RutasSuroccidente {
 		marcas= new ArrayList<Marca>();
                 clientes= new ArrayList<Cliente>();
                 clienteDAO= new ClienteDAO();
-                //cargar();
+                cargar();
 		// TODO Auto-generated constructor stub
 	}
 
