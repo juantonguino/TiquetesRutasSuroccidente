@@ -316,7 +316,7 @@ public class RutasSuroccidente {
             }
             if(marcaE!=null){
                 marcaE.getLineas().remove(buscada);
-                //marcaE.getLineaDAO().eliminar(marcaE, buscada);
+                marcaE.getLineaDAO().eliminar(marcaE, buscada);
             }
 	}
 	
@@ -346,7 +346,7 @@ public class RutasSuroccidente {
         }
             if(marcaE!=null){
                 buscada.setNombre(nNombre);
-                //marcaE.getLineaDAO().actualizar(marcaE, buscada, vNombre);
+                marcaE.getLineaDAO().actualizar(marcaE, buscada, vNombre);
             }
 	}
 	
@@ -365,7 +365,7 @@ public class RutasSuroccidente {
             {
                 Linea nueva= new Linea(nNombreLinea);
                 buscada.getLineas().add(nueva);
-                //buscada.getLineaDAO().agregar(buscada, nueva);
+                buscada.getLineaDAO().agregar(buscada, nueva);
             }
 	}
 	
@@ -736,7 +736,6 @@ public class RutasSuroccidente {
                     c.getTiquetes().add(tiqueteVender);
                     v.getTiqueteDAO().agregar(v, tiqueteVender,c);
                     bandera=true;
-                    //c.getTiqueteDAO().agregar(null, null, c, tiqueteVender);
                 }
             }
         }
